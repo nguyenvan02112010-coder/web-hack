@@ -71,6 +71,9 @@ button,input,textarea,select{font:inherit;color:inherit}
 .fld input,.fld textarea,.srow input,.srow select{background:#f8f9fd;border:1px solid #e3e7f2;border-radius:12px;padding:11px 13px;width:100%;transition:border-color .2s,box-shadow .2s}
 .fld input:focus,.fld textarea:focus,.srow input:focus,.srow select:focus{border-color:var(--i2);box-shadow:0 0 0 4px rgba(13,139,242,.12);outline:none}
 .fld textarea{min-height:88px;resize:vertical}
+.chk{display:flex;align-items:flex-start;gap:9px;font-weight:800;font-size:13.5px;color:#39456b;cursor:pointer;user-select:none;line-height:1.45}
+.chk input{width:18px;height:18px;margin-top:1px;accent-color:#6a5cff;flex:none}
+html.dark .chk{color:#c3cdf0}
 .nt{color:var(--mut);font-size:13px;line-height:1.6}
 .pv{display:flex;align-items:center;gap:14px;background:#f8f9fd;border:1px solid #e9ebf4;border-radius:18px;padding:14px}
 .pv-av{width:76px;height:76px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 8px 20px rgba(23,32,73,.16);background:#eef1f8;flex:none}
@@ -242,7 +245,7 @@ html.dark .tgl .i-moon{display:none}
 <div class="toast" id="toast" hidden></div>
 
 <script>
-const DEF={subUrl:'',likeUrl:'',likeTitle:'Video cần like để tiếp tục vào web',pw:'Nguyenvan2010',
+const DEF={subUrl:'',likeUrl:'',likeTitle:'Video cần like để tiếp tục vào web',notice:'',guide:'',pw:'Nguyenvan2010',
  name:'Nguyên Văn Cheat',badge:'2202CHEAT VIỆT NAM',intro:'Nền tảng phân phối APK & Server',avatar:'./avatar.png',
  socials:[['yt','https://www.youtube.com/@SIKEREAL'],['tg','https://t.me/SIKEMODFF'],['tt','https://tiktok.com/@sikeffmod'],['chat','https://zalo.me/g/2xqvud1opgic0gy0tc9r'],['chat','https://zalo.me/g/inj3bicbrjuz53itudvj'],['rocket','https://tvinh19122012-boop.github.io/BYPASS-WEB']],
  posts:[1,2,3].map(n=>({id:'#00000'+n,title:'BÀI VIẾT MẪU '+n,body:'Nội dung các link sẽ hiện ra ở đây...',url:''}))};
@@ -258,7 +261,7 @@ try{Object.assign(C,JSON.parse(localStorage.getItem('dh_cfg')||'{}'))}catch(e){}
 const SOC_OPTS=[['yt','YouTube'],['tg','Telegram'],['tt','TikTok'],['chat','Zalo'],['rocket','Website']];
 const fld=(l,id,v,ph='',t='input')=>`<div class="fld"><label for="${id}">${l}</label><${t} id="${id}" placeholder="${esc(ph)}" ${t==='input'?`value="${esc(v)}"`:''}>${t==='textarea'?esc(v):''}</${t}></div>`;
 const socRow=s=>`<div class="srow"><select class="s-type" aria-label="Loại liên kết">${SOC_OPTS.map(o=>`<option value="${o[0]}"${o[0]===s[0]?' selected':''}>${o[1]}</option>`).join('')}</select><input class="s-url" type="text" value="${esc(s[1])}" placeholder="https://..."><button class="del" type="button" onclick="this.closest('.srow').remove()" aria-label="Xoá liên kết">✕</button></div>`;
-const postEd=(p,open)=>`<details class="pe"${open?' open':''}><summary><span class="tag">${esc(p.id||'#')}</span><span>${esc(p.title)||'Bài viết mới'}</span></summary><div class="pc"><div class="fld"><label>Mã bài</label><input name="id" value="${esc(p.id)}" placeholder="#112400"></div><div class="fld"><label>Tiêu đề</label><input name="title" value="${esc(p.title)}" placeholder="GUNNY MOBI HACK"></div><div class="fld"><label>Ảnh bìa — hiện to phía trên bài (nên chọn ảnh ngang)</label><div class="uprow"><div class="cv-prev prev"${p.cover?'':' hidden'}><img src="${esc(p.cover||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-cover" type="button">📷 Chọn ảnh bìa</button><button class="btn ghost sm rm-cover" type="button">🗑️ Xoá ảnh bìa</button></div></div><input type="hidden" name="cover" value="${esc(p.cover||'')}"><input type="file" class="f-cover" accept="image/*" hidden></div><div class="fld"><label>Ảnh nhỏ — biểu tượng cạnh tên bài</label><div class="uprow"><div class="ic-prev prev"${p.icon?'':' hidden'}><img src="${esc(p.icon||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-icon" type="button">📷 Chọn ảnh nhỏ</button><button class="btn ghost sm rm-icon" type="button">🗑️ Xoá ảnh nhỏ</button></div></div><input type="hidden" name="icon" value="${esc(p.icon||'')}"><input type="file" class="f-icon" accept="image/*" hidden></div><div class="fld2"><div class="fld"><label>Hệ điều hành (hdh)</label><input name="os" list="osList" value="${esc(p.os||'')}" placeholder="Android"></div><div class="fld"><label>Phiên bản</label><input name="ver" value="${esc(p.ver||'')}" placeholder="V1"></div><div class="fld"><label>Dung lượng</label><input name="size" value="${esc(p.size||'')}" placeholder="100MB"></div></div><div class="fld"><label>Link Get Key (bỏ trống = ẩn nút Get Key)</label><input name="keyUrl" value="${esc(p.keyUrl||'')}" placeholder="https://..."></div><div class="fld"><label>Tính năng (tuỳ chọn — hiện ở dải cuối bài)</label><input name="feat" value="${esc(p.feat||'')}" placeholder="ESP, AIM, TỰ TÌM TRẬN"></div><div class="fld"><label>Nội dung hiện trong popup khi bấm Tải Xuống</label><textarea name="body" placeholder="Link tải, mật khẩu giải nén, hướng dẫn...">${esc(p.body)}</textarea></div><div class="fld"><label>Link nút “Tải ngay” trong popup</label><input name="url" value="${esc(p.url)}" placeholder="https://..."></div><button class="btn ghost sm" type="button" onclick="this.closest('.pe').remove()">🗑️ Xoá bài này</button></div></details>`;
+const postEd=(p,open)=>`<details class="pe"${open?' open':''}><summary><span class="tag">${esc(p.id||'#')}</span><span>${esc(p.title)||'Bài viết mới'}</span></summary><div class="pc"><div class="fld"><label>Mã bài</label><input name="id" value="${esc(p.id)}" placeholder="#112400"></div><div class="fld"><label>Tiêu đề</label><input name="title" value="${esc(p.title)}" placeholder="GUNNY MOBI HACK"></div><div class="fld"><label>Ảnh bìa — hiện to phía trên bài (nên chọn ảnh ngang)</label><div class="uprow"><div class="cv-prev prev"${p.cover?'':' hidden'}><img src="${esc(p.cover||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-cover" type="button">📷 Chọn ảnh bìa</button><button class="btn ghost sm rm-cover" type="button">🗑️ Xoá ảnh bìa</button></div></div><input type="hidden" name="cover" value="${esc(p.cover||'')}"><input type="file" class="f-cover" accept="image/*" hidden></div><div class="fld"><label>Ảnh nhỏ — biểu tượng cạnh tên bài</label><div class="uprow"><div class="ic-prev prev"${p.icon?'':' hidden'}><img src="${esc(p.icon||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-icon" type="button">📷 Chọn ảnh nhỏ</button><button class="btn ghost sm rm-icon" type="button">🗑️ Xoá ảnh nhỏ</button></div></div><input type="hidden" name="icon" value="${esc(p.icon||'')}"><input type="file" class="f-icon" accept="image/*" hidden></div><div class="fld2"><div class="fld"><label>Hệ điều hành (hdh)</label><input name="os" list="osList" value="${esc(p.os||'')}" placeholder="Android"></div><div class="fld"><label>Phiên bản</label><input name="ver" value="${esc(p.ver||'')}" placeholder="V1"></div><div class="fld"><label>Dung lượng</label><input name="size" value="${esc(p.size||'')}" placeholder="100MB"></div></div><div class="fld"><label>Link Get Key (bỏ trống = ẩn nút Get Key)</label><input name="keyUrl" value="${esc(p.keyUrl||'')}" placeholder="https://..."></div><div class="fld"><label>Tính năng (tuỳ chọn — hiện ở dải cuối bài)</label><input name="feat" value="${esc(p.feat||'')}" placeholder="ESP, AIM, TỰ TÌM TRẬN"></div><label class="chk"><input type="checkbox" name="isNew"${p.isNew?' checked':''}>🆕 Đánh dấu bài này là BÀI MỚI (hiện huy hiệu trên thẻ)</label><div class="fld"><label>Nội dung hiện trong popup khi bấm Tải Xuống</label><textarea name="body" placeholder="Link tải, mật khẩu giải nén, hướng dẫn...">${esc(p.body)}</textarea></div><div class="fld"><label>Link nút “Tải ngay” trong popup</label><input name="url" value="${esc(p.url)}" placeholder="https://..."></div><button class="btn ghost sm" type="button" onclick="this.closest('.pe').remove()">🗑️ Xoá bài này</button></div></details>`;
 
 function pvUpdate(){
  const src=($('#a_avatar').value||'').trim();
@@ -284,6 +287,8 @@ function renderForm(){
   ${fld('Nhãn nhỏ (badge)','a_badge',C.badge,'2202CHEAT VIỆT NAM')}
   ${fld('Tên hiển thị','a_name',C.name,'Nguyên Văn Cheat')}
   ${fld('Phần giới thiệu','a_intro',C.intro,'Nền tảng phân phối APK & Server','textarea')}
+  ${fld('Thông báo trên trang chủ (để trống = tắt)','a_notice',C.notice,'VD: Nhớ đăng ký kênh để nhận bài mới nhé!')}
+  ${fld('Nội dung HƯỚNG DẪN (nút ? góc trái dưới; để trống = ẩn nút)','a_guide',C.guide,'VD: 1. Bấm Tải Xuống... (xuống dòng được)','textarea')}
  </section>
  <section class="sec">
   <h4>${ico('yt')}Link xác minh</h4>
@@ -379,8 +384,10 @@ function collect(){
  C.badge=$('#a_badge').value.trim();
  C.name=$('#a_name').value.trim()||DEF.name;
  C.intro=$('#a_intro').value.trim();
+ C.notice=$('#a_notice').value.trim();
+ C.guide=$('#a_guide').value.trim();
  C.socials=[...document.querySelectorAll('#socRows .srow')].map(r=>[r.querySelector('.s-type').value,r.querySelector('.s-url').value.trim()]).filter(s=>s[1]);
- C.posts=[...document.querySelectorAll('#pl .pe')].map(e=>{const g=n=>{const el=e.querySelector('[name='+n+']');return el?el.value:''};return{id:g('id').trim(),title:g('title').trim(),cover:g('cover'),icon:g('icon'),os:g('os').trim(),ver:g('ver').trim(),size:g('size').trim(),keyUrl:g('keyUrl').trim(),feat:g('feat').trim(),body:g('body'),url:g('url').trim()}}).filter(p=>p.title||p.body||p.url||p.cover||p.icon||p.os||p.ver||p.size);
+ C.posts=[...document.querySelectorAll('#pl .pe')].map(e=>{const g=n=>{const el=e.querySelector('[name='+n+']');return el?el.value:''};return{id:g('id').trim(),title:g('title').trim(),cover:g('cover'),icon:g('icon'),os:g('os').trim(),ver:g('ver').trim(),size:g('size').trim(),keyUrl:g('keyUrl').trim(),feat:g('feat').trim(),isNew:!!(e.querySelector('[name=isNew]')||{}).checked,body:g('body'),url:g('url').trim()}}).filter(p=>p.title||p.body||p.url||p.cover||p.icon||p.os||p.ver||p.size);
  const np=$('#a_pw').value;if(np)C.pw=np;
 }
 function showAdmin(){
@@ -401,7 +408,7 @@ $('#exp').onclick=()=>{collect();const{pw,...pub}=C;const u=URL.createObjectURL(
 $('#impBtn').onclick=()=>$('#impFile').click();
 $('#impFile').onchange=e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const j=JSON.parse(rd.result);delete j.pw;Object.assign(C,j);renderForm();toast('Đã nhập config ✔')}catch(err){toast('File config không hợp lệ ❌')}};rd.readAsText(f)};
 $('#clr').onclick=()=>{if(!confirm('Xoá hết thay đổi đã lưu trên máy này?'))return;try{localStorage.removeItem('dh_cfg')}catch(e){}location.reload()};
-$('#rst').onclick=()=>{try{localStorage.setItem('dh_st',JSON.stringify({sub:0,like:0}))}catch(e){}toast('Đã làm lại xác minh cho máy này ✔')};
+$('#rst').onclick=()=>{try{sessionStorage.removeItem('dh_st');localStorage.removeItem('dh_st')}catch(e){}toast('Đã làm lại xác minh cho máy này ✔')};
 $('#logout').onclick=()=>{try{sessionStorage.removeItem('dh_admin_ok')}catch(e){}location.reload()};
 
 /* ---- Ẩn login: máy tính nháy đúp số 404 · đt chạm 3 lần góc dưới bên phải ---- */

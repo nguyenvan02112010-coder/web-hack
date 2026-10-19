@@ -32,9 +32,13 @@
       TÍNH NĂNG tuỳ chọn — hiện thành thẻ giống hình.
       Nút "Tải Xuống" trên thẻ vẫn mở hộp chọn link như trước (không đổi).
      + Đánh dấu từng bài là “BÀI MỚI” — thẻ sẽ hiện huy hiệu 🆕 MỚI.
+     + Dán LINK ẢNH hoặc LINK YOUTUBE vào ô ảnh bìa / ảnh nhỏ — tự lấy ảnh,
+       không cần up ảnh (ảnh YouTube tự lấy thumbnail chất lượng cao).
     + Viết THÔNG BÁO hiển thị trên trang chủ (để trống = tắt; khách bấm ✕ để ẩn).
      + Viết nội dung HƯỚNG DẪN — khách bấm nút “?” ở góc trái dưới trang chủ (để trống = ẩn nút).
      + Đổi mật khẩu admin.
+     + Xem “📊 Thống kê thật” — tự đếm số lượt truy cập, lượt bấm Đăng ký / Like
+       và lượt tải của từng bài từ TẤT CẢ khách truy cập (cần mạng, bấm 🔄 để cập nhật).
  - "Lưu thay đổi"  = chỉ xem thử trên máy bạn (lưu tạm trong trình duyệt).
  - "Tải config.json" = tải file mới rồi THAY THẾ file config.json trên GitHub.
  - "Nhập config.json" = nạp file config đang có trên máy vào admin để sửa tiếp.
@@ -54,11 +58,16 @@
   - Trang chủ có thêm: Ô TÌM KIẾM bài viết + bộ lọc hệ điều hành (Android/iOS/PC),
     nút CHIA SẺ trên mỗi thẻ (copy link web gửi cho bạn bè) và nút ⬆️ LÊN ĐẦU TRANG.
   - Bấm vào thân thẻ bài viết cũng mở bảng tải; gõ phím “/” để nhảy vào ô tìm kiếm.
+  - ĐÃ BẬT CHỐNG COPY MÃ NGUỒN: chặn chuột phải, bôi đen copy, Ctrl+U / Ctrl+S / F12…
+    (người rành máy tính vẫn có cách xem, nhưng sẽ khó hơn rất nhiều) — kèm thông báo
+    nhắc khéo hiện lên khi có người thử 😏.
   - Bấm vào khung SỐ LIỆU (500 M+ / 2026 / #1) để các số tự đếm chạy lại; ảnh đại
     diện có khung holographic xoay + sao bay quanh, nhún nhảy và nảy khi bấm.
  - Mật khẩu admin chỉ lưu trên máy (localStorage), KHÔNG nằm trong config.json.
+  - Mục “📊 Thống kê thật” trong admin cần mạng để xem số liệu; nếu dịch vụ đếm tạm
+    lỗi thì web vẫn chạy bình thường và số liệu sẽ tự đếm tiếp sau đó.
  - Mục "NƠI MUA KEY..." đã được xoá — chỉ còn nút "LIÊN HỆ HỢP TÁC LÀM ĂN".
    Muốn đổi link hợp tác: mở index.html, sửa href của thẻ <a class="feature" ...>
-   (mặc định đang trỏ tới https://t.me/SIKEMODFF).
+   (mặc định đang trỏ tới https://t.me/shirou36).
  - Ảnh avatar chọn từ máy được lưu dạng base64 trong config.json — nên chọn ảnh dưới ~1MB.
  - Nếu sửa tay config.json: giữ đúng định dạng JSON, đừng quên dấu phẩy giữa các dòng.

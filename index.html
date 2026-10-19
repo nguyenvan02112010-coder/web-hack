@@ -7,6 +7,22 @@
 <meta name="description" content="Nguyên Văn Cheat - nền tảng phân phối APK và Server.">
 <meta name="theme-color" content="#f5f6fb">
 <script>try{var _t=localStorage.getItem('dh_theme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');var _m=document.querySelector('meta[name=theme-color]');if(_m)_m.content='#0a101f'}}catch(e){}</script>
+<script>(function(){
+ var last=0;
+ function say(t){try{var n=Date.now();if(n-last<2400)return;last=n;if(typeof toast==='function')toast(t)}catch(e){}}
+ function isOk(e){var t=e.target;return !!t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable)}
+ function pick(a){return a[Math.floor(Math.random()*a.length)]}
+ document.addEventListener('contextmenu',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Chuột phải làm gì đấy? 😏','Định soi gì thế bạn? 😜','Ơ, chuột phải à? Làm gì vậy e 😏']))});
+ document.addEventListener('copy',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Copy gì thế? Không cho đâu 😜','Tính lấy bài của tôi à? 😏','Định copy source à? Làm gì vậy e 😏']))});
+ document.addEventListener('cut',function(e){if(isOk(e))return;e.preventDefault();say('Cắt gì thế? Không cho đâu 😜')});
+ document.addEventListener('selectstart',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Bôi đen làm gì vậy? 😏','Định copy à? Không dễ đâu nha 😜']))});
+ document.addEventListener('dragstart',function(e){if(!isOk(e)){e.preventDefault();say('Kéo ảnh đi đâu đấy? 😏')}},true);
+ document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();var cmd=e.ctrlKey||e.metaKey;
+  if(k==='f12'||(cmd&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k'))||(cmd&&(k==='u'||k==='s'))){
+   e.preventDefault();e.stopPropagation();
+   say(pick(['Định xem source à? Không dễ đâu nha 😏','Tính làm gì vậy bạn? 😜','Source có chủ rồi nha 😏']));
+  }
+ },true)})();</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h6l-1 8 9-12h-6z' fill='%230d8bf2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +40,9 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:inherit;margin:0}
 [hidden]{display:none!important}
 body{min-height:100dvh;background:radial-gradient(60% 34% at 18% 0,rgba(106,92,255,.14),transparent 70%),radial-gradient(55% 30% at 88% 4%,rgba(9,198,220,.14),transparent 70%),var(--bg);color:var(--ink);font:500 15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{-webkit-user-select:none;user-select:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
+img{-webkit-user-drag:none;-webkit-touch-callout:none}
 button,input,textarea,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--i2);outline-offset:2px}
 .i{width:1.2em;height:1.2em;flex:none}
@@ -428,17 +447,17 @@ html.dark .tgl .i-moon{display:none}
  <section class="hero">
   <div class="greeting"><span id="greetText">👋 Xin chào</span> · <span class="clock" id="heroClock">--:--:--</span></div>
   <div class="avatar-wrap"><span class="ring2" aria-hidden="true"></span><span class="orbit" aria-hidden="true"><i class="ostar o1">✦</i><i class="ostar o2">✧</i></span><span class="orbit rev" aria-hidden="true"><i class="ostar o3">✦</i><i class="ostar o4">✧</i></span><img class="avatar" id="heroAvatar" src="./avatar.png" alt="Ảnh đại diện"></div>
-  <div class="hero-badge" id="heroBadge">2202CHEAT VIỆT NAM</div>
+  <div class="hero-badge" id="heroBadge">2010 CHEAT VIỆT NAM</div>
   <p class="hi">Xin chào, tôi là</p>
   <h1><span id="heroName">Nguyên Văn Cheat</span><span class="verified" title="Đã xác minh" aria-label="Đã xác minh"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-verified"/></svg></span></h1>
-  <p class="subtitle" id="heroIntro">Nền tảng phân phối APK &amp; Server</p>
+  <p class="subtitle" id="heroIntro">Chuyên chia sẻ hack cho anh em</p>
   <div class="pills" id="heroPills"></div>
   <div class="stats" id="statsBox" title="Bấm để xem lại số liệu">
    <div class="stat"><div class="v"><strong>500 M+</strong></div><span>☁️ Lượt tải</span></div>
    <div class="stat"><div class="v"><strong>2026</strong></div><span>🕓 Cập nhật</span></div>
    <div class="stat"><div class="v"><strong>#1</strong><em>🏆</em></div><span class="os-pill"><svg class="i i-os" viewBox="0 0 384 512"><use href="#i-apple"/></svg>iOS <b>&amp;</b> <svg class="i i-and" viewBox="0 0 576 512"><use href="#i-andr"/></svg>Android<i class="dot"></i></span></div>
   </div>
-  <a class="feature" id="coopCard" href="https://t.me/SIKEMODFF" target="_blank" rel="noopener">
+  <a class="feature" id="coopCard" href="https://t.me/shirou36" target="_blank" rel="noopener">
    <span class="feature-icon">🤝</span>
    <span class="feature-copy"><strong>LIÊN HỆ HỢP TÁC LÀM ĂN</strong><span>Trao đổi công việc &amp; hỗ trợ nhanh qua Telegram</span></span>
    <span class="feature-arrow">→</span>
@@ -469,8 +488,8 @@ html.dark .tgl .i-moon{display:none}
 
 <script>
 const DEF={subUrl:'',likeUrl:'',likeTitle:'Video cần like để tiếp tục vào web',notice:'',guide:'',
- name:'Nguyên Văn Cheat',badge:'2202CHEAT VIỆT NAM',intro:'Nền tảng phân phối APK & Server',avatar:'./avatar.png',
- socials:[['yt','https://www.youtube.com/@SIKEREAL'],['tg','https://t.me/SIKEMODFF'],['tt','https://tiktok.com/@sikeffmod'],['chat','https://zalo.me/g/2xqvud1opgic0gy0tc9r'],['chat','https://zalo.me/g/inj3bicbrjuz53itudvj'],['rocket','https://tvinh19122012-boop.github.io/BYPASS-WEB']],
+ name:'Nguyên Văn Cheat',badge:'2010 CHEAT VIỆT NAM',intro:'Chuyên chia sẻ hack cho anh em',avatar:'./avatar.png',
+ socials:[['yt','https://www.youtube.com/@shirou36'],['tg','https://t.me/shirou36']],
  posts:[1,2,3].map(n=>({id:'#00000'+n,title:'BÀI VIẾT MẪU '+n,body:'Nội dung các link sẽ hiện ra ở đây...',url:''}))};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -482,6 +501,11 @@ let C=JSON.parse(JSON.stringify(DEF)),S={sub:0,like:0},pq='',po='';
 try{Object.assign(S,JSON.parse(sessionStorage.getItem('dh_st')||'{}'))}catch(e){}
 const saveS=()=>{try{sessionStorage.setItem('dh_st',JSON.stringify(S))}catch(e){}};
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+/* ---- Thống kê thật (abacus — mạng lỗi thì im lặng bỏ qua, không ảnh hưởng web) ---- */
+const STAT_NS='nguyenvancheat-web';
+const statHit=k=>{try{fetch('https://abacus.jasoncameron.dev/hit/'+STAT_NS+'/'+k,{keepalive:true}).catch(()=>{})}catch(e){}};
+const statDay=()=>{try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh'}).format(new Date())}catch(e){return new Date().toISOString().slice(0,10)}};
+try{if(!sessionStorage.getItem('dh_vc')){sessionStorage.setItem('dh_vc','1');statHit('views');statHit('views-'+statDay())}}catch(e){}
 
 function socLabel(s,i){
  if(s[0]==='chat'){const n=C.socials.slice(0,i).filter(x=>x[0]==='chat').length+1;return 'Zalo'+(n>1?' '+n:'')}
@@ -499,7 +523,7 @@ $('#year').textContent=new Date().getFullYear();
 function route(){
  const done=S.sub&&S.like;
  $('#gate').hidden=done;$('#hub').hidden=!done;
- if(done){renderHub();syncToTop();scrollTo(0,0);playStats();return}
+ if(done){try{if(!sessionStorage.getItem('dh_pc')){sessionStorage.setItem('dh_pc','1');statHit('passed')}}catch(e){}renderHub();syncToTop();scrollTo(0,0);playStats();return}
  $('#s1').hidden=!!S.sub;$('#s2').hidden=!S.sub;
  const d1=$('#dot1'),d2=$('#dot2');
  d1.textContent=S.sub?'✓':'1';d1.className='sdot '+(S.sub?'done':'on');
@@ -517,7 +541,7 @@ function ready(btn,hint,label){
  h.innerHTML=ico('ok')+`<span>Tuyệt! Bây giờ bấm “${label}” để tiếp tục${hint==='#likeHint'?' vào web':''}.</span>`;
 }
 function openLink(kind){return e=>{
- if(!safe(C[kind+'Url'])){e.preventDefault();toast('Admin chưa cài link này')}
+ if(!safe(C[kind+'Url'])){e.preventDefault();toast('Admin chưa cài link này')}else statHit(kind);
  kind==='sub'?ready('#subOk','#subHint','Tôi đã đăng ký'):ready('#likeOk','#likeHint','Tôi đã Like');
 }}
 $('#subBtn').onclick=openLink('sub');$('#likeBtn').onclick=openLink('like');
@@ -628,7 +652,7 @@ function openDl(i){
  setTimeout(()=>{
   $('#dlBody').innerHTML=`<div class="dl-in"><div class="dl-head">${ico('dl')}<h3>${esc(p.title||'Bài viết')}</h3></div><div class="pbody">${linkify(p.body)}</div><div class="row"><button class="btn ghost sm" id="cp">${ico('copy')}Copy nội dung</button><a class="btn mint sm" id="dlGo" ${safe(p.url)?`href="${esc(p.url)}" target="_blank" rel="noopener"`:'href="#"'}>${ico('dl')}Tải ngay</a></div></div>`;
   $('#cp').onclick=async()=>{try{await navigator.clipboard.writeText(p.body||'');toast('Đã copy nội dung ✔')}catch(e){toast('Không copy được, hãy copy thủ công')}};
-  $('#dlGo').onclick=e=>{if(!safe(p.url)){e.preventDefault();toast('Admin chưa cài link tải cho bài này')}};
+  $('#dlGo').onclick=e=>{if(!safe(p.url)){e.preventDefault();toast('Admin chưa cài link tải cho bài này');return}statHit('dl-total');const sid=String(p.id||'').replace(/[^\w-]/g,'').slice(0,40);if(sid)statHit('dl-'+sid)};
  },450);
 }
 $('#dlX').onclick=()=>$('#dl').hidden=true;

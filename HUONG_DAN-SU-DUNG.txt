@@ -1,0 +1,53 @@
+========================================
+ NGUYÊN VĂN CHEAT — BỘ FILE GITHUB READY
+========================================
+
+1) CÁC FILE TRONG BỘ NÀY
+ - index.html            : Trang chủ (xác minh + hồ sơ + bài viết). KHÔNG còn chứa trang admin ẩn.
+ - admin.html            : Trang quản trị riêng — đăng nhập bằng mật khẩu.
+ - config.json           : Dữ liệu trang (tên, giới thiệu, avatar, link xác minh, mạng xã hội, bài viết).
+ - avatar.png            : Ảnh đại diện mặc định.
+ - HUONG_DAN-SU-DUNG.txt : File này.
+
+2) CÁCH DÙNG TRANG ADMIN (admin.html)
+ - Up toàn bộ file lên GitHub Pages.
+ - Mở: https://<tên-miền-của-bạn>/admin.html
+ - Trang sẽ hiện ra như một trang "404 — Không tìm thấy trang" bình thường
+   (để người ngoài không biết đây là trang quản trị).
+ - MỞ NHANH TỪ TRANG CHỦ: ở trang chủ, BẤM / CHẠM 5 LẦN LIÊN TIẾP vào
+   ẢNH ĐẠI DIỆN (trong vòng 1,6 giây) → tự mở trang admin kèm ô đăng nhập.
+ - CÁCH HIỆN Ô ĐĂNG NHẬP (khi vào thẳng /admin.html):
+     · Trên MÁY TÍNH: NHÁY ĐÚP CHUỘT vào con số "404" ở giữa trang.
+     · Trên ĐIỆN THOẠI: chạm 3 LẦN LIÊN TIẾP vào GÓC DƯỚI BÊN PHẢI màn hình
+       (trong vòng 1,6 giây), hoặc chạm đúp vào số "404".
+   Bấm phím Esc để ẩn lại.
+ - Mật khẩu admin: hãy tự đặt trong mục "Bảo mật" của trang admin — đừng để lộ mật khẩu khi chia sẻ file này.
+ - Trong admin có thể:
+    + Chọn avatar từ máy (ảnh tự thu nhỏ, nhúng thẳng vào config.json — không cần up file riêng).
+    + Sửa nhãn badge, tên hiển thị, phần giới thiệu.
+    + Sửa link đăng ký kênh / link video like.
+    + Thêm - xoá mạng xã hội (Telegram, Zalo, YouTube, TikTok, Website).
+    + Thêm - sửa - xoá bài viết: kèm ẢNH BÌA, ẢNH NHỎ (biểu tượng), HỆ ĐIỀU HÀNH
+      (hdh: Android/iOS/PC...), PHIÊN BẢN, DUNG LƯỢNG, nút GET KEY và dải
+      TÍNH NĂNG tuỳ chọn — hiện thành thẻ giống hình.
+      Nút "Tải Xuống" trên thẻ vẫn mở hộp chọn link như trước (không đổi).
+    + Đổi mật khẩu admin.
+ - "Lưu thay đổi"  = chỉ xem thử trên máy bạn (lưu tạm trong trình duyệt).
+ - "Tải config.json" = tải file mới rồi THAY THẾ file config.json trên GitHub.
+ - "Nhập config.json" = nạp file config đang có trên máy vào admin để sửa tiếp.
+
+3) LƯU Ý
+ - Màn hình "WELCOME — Đang khởi động..." khi mở web là hiệu ứng khởi động
+   (khoảng 2 giây) rồi tự vào trang — màu màn hình tự đổi theo chế độ Sáng/Tối
+   của máy bạn (không phải lỗi).
+ - Khi vào trang, các số liệu (500 M+, 2026) sẽ tự đếm chạy lên — đây là hiệu
+   ứng sinh động, không phải lỗi.
+ - Web có 2 chế độ SÁNG / TỐI: lần đầu tự theo cài đặt hệ thống của máy; bấm nút
+   tròn 🌙/☀️ ở GÓC TRÊN BÊN PHẢI để đổi — web sẽ nhớ lựa chọn của bạn.
+   (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
+ - Mật khẩu admin chỉ lưu trên máy (localStorage), KHÔNG nằm trong config.json.
+ - Mục "NƠI MUA KEY..." đã được xoá — chỉ còn nút "LIÊN HỆ HỢP TÁC LÀM ĂN".
+   Muốn đổi link hợp tác: mở index.html, sửa href của thẻ <a class="feature" ...>
+   (mặc định đang trỏ tới https://t.me/SIKEMODFF).
+ - Ảnh avatar chọn từ máy được lưu dạng base64 trong config.json — nên chọn ảnh dưới ~1MB.
+ - Nếu sửa tay config.json: giữ đúng định dạng JSON, đừng quên dấu phẩy giữa các dòng.

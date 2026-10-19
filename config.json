@@ -1,0 +1,20 @@
+{
+  "subUrl": "https://www.youtube.com/@SIKEREAL?sub_confirmation=1",
+  "likeUrl": "",
+  "likeTitle": "Video cần like để tiếp tục vào web",
+  "name": "Nguyên Văn Cheat",
+  "badge": "2202CHEAT VIỆT NAM",
+  "intro": "Nền tảng phân phối APK & Server",
+  "avatar": "./avatar.png",
+  "socials": [
+    ["yt", "https://www.youtube.com/@SIKEREAL"],
+    ["tg", "https://t.me/SIKEMODFF"],
+    ["tt", "https://tiktok.com/@sikeffmod"],
+    ["chat", "https://zalo.me/g/2xqvud1opgic0gy0tc9r"],
+    ["chat", "https://zalo.me/g/inj3bicbrjuz53itudvj"],
+    ["rocket", "https://tvinh19122012-boop.github.io/BYPASS-WEB"]
+  ],
+  "posts": [
+    { "id": "#000001", "title": "BÀI VIẾT MẪU 1", "body": "Nội dung các link sẽ hiện ra ở đây...", "url": "", "os": "Android", "ver": "V1", "size": "100MB" }
+  ]
+}

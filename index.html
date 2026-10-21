@@ -488,7 +488,7 @@ html.dark .tgl .i-moon{display:none}
    <p class="lead">Bấm nút bên dưới, <span class="chip red"><svg class="i"><use href="#i-yt"/></svg>ĐĂNG KÝ</span> kênh YouTube của chúng tôi và ở lại ít nhất 4 giây để tiếp tục nhé!<br>Cảm ơn bạn đã ủng hộ ❤️</p>
    <a class="btn red" id="subBtn" target="_blank" rel="noopener"><svg class="i"><use href="#i-yt"/></svg>Đăng ký kênh ngay</a>
    <button class="btn mint" id="subOk" disabled><svg class="i"><use href="#i-ok"/></svg>Tôi đã đăng ký</button>
-   <p class="hint" id="subHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Đăng ký kênh ngay”, ở lại YouTube ít nhất 4 giây rồi quay lại. Nút xác nhận sẽ tự mở khoá.</span></p>
+   <p class="hint" id="subHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Đăng ký kênh ngay” và chờ khoảng 6 giây; nếu mở YouTube thì ở lại ít nhất 4 giây. Nút xác nhận sẽ tự mở khoá.</span></p>
   </div>
 
   <div class="step" id="s2" hidden>
@@ -498,7 +498,7 @@ html.dark .tgl .i-moon{display:none}
    <div class="vid"><div class="thumb" id="thumb"></div><div><b id="vTitle"></b><small id="vUrl"></small></div></div>
    <a class="btn grn" id="likeBtn" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#10c98a,#059669);color:#fff;box-shadow:0 10px 26px rgba(5,150,105,.3)"><svg class="i"><use href="#i-like"/></svg>Mở video &amp; Like ngay</a>
    <button class="btn mint" id="likeOk" disabled><svg class="i"><use href="#i-ok"/></svg>Tôi đã Like (Tiếp tục)</button>
-   <p class="hint" id="likeHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Mở video &amp; Like ngay”, ở lại YouTube ít nhất 4 giây rồi quay lại. Nút tiếp tục sẽ tự mở khoá.</span></p>
+   <p class="hint" id="likeHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Mở video &amp; Like ngay” và chờ khoảng 6 giây; nếu mở YouTube thì ở lại ít nhất 4 giây. Nút tiếp tục sẽ tự mở khoá.</span></p>
   </div>
  </section>
 </main>
@@ -627,16 +627,11 @@ function vfUpdate(k){
  }
  const away=v.away+(v.awayStart?Date.now()-v.awayStart:0);
  const total=v.clickAt?Date.now()-v.clickAt:0;
- const awayLeft=Math.max(0,Math.ceil((VF_MIN_AWAY-away)/1000));
  const totalLeft=Math.max(0,Math.ceil((VF_MIN_TOTAL-total)/1000));
- if(awayLeft>0){
-  btn.disabled=true;btn.innerHTML=ico('clock')+`Cần thêm ${awayLeft}s trên YouTube`;
-  h.className='hint';h.innerHTML=ico('clock')+`<span>Bạn cần ở lại YouTube thêm ${awayLeft} giây. Bấm lại “${k==='sub'?'Đăng ký kênh ngay':'Mở video & Like ngay'}” nếu chưa đủ.</span>`;
-  return;
- }
  if(totalLeft>0){
+  const awayOk=away>=VF_MIN_AWAY;
   btn.disabled=true;btn.innerHTML=ico('clock')+`Đang xác minh (${totalLeft}s)`;
-  h.className='hint';h.innerHTML=ico('clock')+`<span>Đã ghi nhận thời gian trên YouTube. Chờ thêm ${totalLeft} giây để hoàn tất xác minh...</span>`;
+  h.className='hint';h.innerHTML=ico('clock')+`<span>${awayOk?'Đã ghi nhận YouTube. ':''}Nút sẽ tự mở khoá sau ${totalLeft} giây...</span>`;
   return;
  }
  v.ready=true;v.active=false;

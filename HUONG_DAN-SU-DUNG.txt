@@ -26,8 +26,8 @@
     + Chọn avatar từ máy (ảnh tự thu nhỏ, nhúng thẳng vào config.json — không cần up file riêng).
     + Sửa nhãn badge, tên hiển thị, phần giới thiệu.
     + Sửa link đăng ký kênh / link video like (video YouTube sẽ phát ngay
-      trong bước xác minh; khách vẫn phải mở YouTube và ở lại ít nhất 4 giây
-      thì nút xác nhận mới mở khoá).
+      trong bước xác minh; khách mở YouTube ít nhất 4 giây, nút xác nhận tự
+      mở sau tối đa 6 giây).
     + Thêm - xoá mạng xã hội (Telegram, Zalo, YouTube, TikTok, Website).
     + Bật/tắt NHẠC NỀN, tự phát khi vào web, chỉnh âm lượng và thêm bài
       bằng LINK MP3 hoặc LINK YOUTUBE (không cần up file nhạc).
@@ -60,9 +60,9 @@
    (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
   - XÁC MINH NGHIÊM NGẶT THEO PHIÊN: đang xem mà tải lại trang (F5) thì không
     phải làm lại, nhưng ĐÓNG TAB / mở lại web từ đầu sẽ phải Đăng ký + Like lại.
-    Khi bấm link Đăng ký hoặc Like, khách phải mở YouTube và ở lại ít nhất
-    4 giây rồi quay lại; tổng thời gian xác minh tối thiểu 6 giây thì nút xác
-    nhận mới mở khoá (giúp kênh của bạn được ủng hộ thật sự mỗi lần khách ghé).
+    Khi bấm link Đăng ký hoặc Like, khách mở YouTube ít nhất 4 giây rồi quay
+    lại. Nút xác nhận tự mở sau tối đa 6 giây (kể cả khi trình duyệt không nhận
+    diện được việc chuyển tab), nên khách không bị đứng.
   - Trang chủ có thêm: Ô TÌM KIẾM bài viết + bộ lọc hệ điều hành (Android/iOS/PC),
     nút CHIA SẺ trên mỗi thẻ (copy link web gửi cho bạn bè) và nút ⬆️ LÊN ĐẦU TRANG.
   - Nút 🎵 ở góc trái dưới: mở TRÌNH PHÁT NHẠC (phát/tạm dừng, bài trước/sau,

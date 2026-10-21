@@ -25,12 +25,18 @@
  - Trong admin có thể:
     + Chọn avatar từ máy (ảnh tự thu nhỏ, nhúng thẳng vào config.json — không cần up file riêng).
     + Sửa nhãn badge, tên hiển thị, phần giới thiệu.
-    + Sửa link đăng ký kênh / link video like.
+    + Sửa link đăng ký kênh / link video like (video YouTube sẽ phát ngay
+      trong bước xác minh; khách vẫn phải mở YouTube và ở lại ít nhất 4 giây
+      thì nút xác nhận mới mở khoá).
     + Thêm - xoá mạng xã hội (Telegram, Zalo, YouTube, TikTok, Website).
+    + Bật/tắt NHẠC NỀN, tự phát khi vào web, chỉnh âm lượng và thêm bài
+      bằng LINK MP3 hoặc LINK YOUTUBE (không cần up file nhạc).
     + Thêm - sửa - xoá bài viết: kèm ẢNH BÌA, ẢNH NHỎ (biểu tượng), HỆ ĐIỀU HÀNH
       (hdh: Android/iOS/PC...), PHIÊN BẢN, DUNG LƯỢNG, nút GET KEY và dải
       TÍNH NĂNG tuỳ chọn — hiện thành thẻ giống hình.
       Nút "Tải Xuống" trên thẻ vẫn mở hộp chọn link như trước (không đổi).
+      Bài mới thêm sẽ nằm đầu danh sách và TỰ ĐẨY LÊN ĐẦU trang chủ
+      (bài cũ tự xuống dưới, không cần sắp xếp tay).
      + Đánh dấu từng bài là “BÀI MỚI” — thẻ sẽ hiện huy hiệu 🆕 MỚI.
      + Dán LINK ẢNH hoặc LINK YOUTUBE vào ô ảnh bìa / ảnh nhỏ — tự lấy ảnh,
        không cần up ảnh (ảnh YouTube tự lấy thumbnail chất lượng cao).
@@ -52,15 +58,21 @@
  - Web có 2 chế độ SÁNG / TỐI: lần đầu tự theo cài đặt hệ thống của máy; bấm nút
    tròn 🌙/☀️ ở GÓC TRÊN BÊN PHẢI để đổi — web sẽ nhớ lựa chọn của bạn.
    (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
-  - XÁC MINH THEO PHIÊN: đang xem mà tải lại trang (F5) thì không phải làm lại,
-    nhưng ĐÓNG TAB / mở lại web từ đầu sẽ phải Đăng ký + Like lại (giúp kênh
-    của bạn được ủng hộ mỗi lần khách ghé thăm).
+  - XÁC MINH NGHIÊM NGẶT THEO PHIÊN: đang xem mà tải lại trang (F5) thì không
+    phải làm lại, nhưng ĐÓNG TAB / mở lại web từ đầu sẽ phải Đăng ký + Like lại.
+    Khi bấm link Đăng ký hoặc Like, khách phải mở YouTube và ở lại ít nhất
+    4 giây rồi quay lại; tổng thời gian xác minh tối thiểu 6 giây thì nút xác
+    nhận mới mở khoá (giúp kênh của bạn được ủng hộ thật sự mỗi lần khách ghé).
   - Trang chủ có thêm: Ô TÌM KIẾM bài viết + bộ lọc hệ điều hành (Android/iOS/PC),
     nút CHIA SẺ trên mỗi thẻ (copy link web gửi cho bạn bè) và nút ⬆️ LÊN ĐẦU TRANG.
+  - Nút 🎵 ở góc trái dưới: mở TRÌNH PHÁT NHẠC (phát/tạm dừng, bài trước/sau,
+    tua bài, chỉnh âm lượng, chọn bài trong danh sách). Nhạc tự phát sau cú bấm
+    đầu tiên của khách nếu bật “Tự phát”; khách tắt thì web nhớ và không tự bật lại.
   - Bấm vào thân thẻ bài viết cũng mở bảng tải; gõ phím “/” để nhảy vào ô tìm kiếm.
-  - ĐÃ BẬT CHỐNG COPY MÃ NGUỒN: chặn chuột phải, bôi đen copy, Ctrl+U / Ctrl+S / F12…
-    (người rành máy tính vẫn có cách xem, nhưng sẽ khó hơn rất nhiều) — kèm thông báo
-    nhắc khéo hiện lên khi có người thử 😏.
+  - ĐÃ BẬT CHỐNG COPY MÃ NGUỒN: chặn chuột phải, copy, Ctrl+U / Ctrl+S / F12…
+    (bấm chuột trái bình thường KHÔNG bị cảnh báo — chỉ hiện thông báo khi có
+    người thật sự thử copy / mở source. Người rành máy tính vẫn có cách xem,
+    nhưng sẽ khó hơn rất nhiều) — kèm thông báo nhắc khéo hiện lên 😏.
   - Bấm vào khung SỐ LIỆU (500 M+ / 2026 / #1) để các số tự đếm chạy lại; ảnh đại
     diện có khung holographic xoay + sao bay quanh, nhún nhảy và nảy khi bấm.
  - Mật khẩu admin chỉ lưu trên máy (localStorage), KHÔNG nằm trong config.json.

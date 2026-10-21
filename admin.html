@@ -97,6 +97,9 @@ html.dark .strow2 .n{color:#9aa6ff}
 .srow{display:flex;gap:8px;align-items:center;animation:up .3s both}
 .srow select{flex:0 0 122px;padding:11px 6px}
 .srow input{flex:1;min-width:0}
+.srow .m-name{flex:.62}
+.ckrow{display:flex;gap:9px;align-items:flex-start;font-weight:700;font-size:13.5px;color:var(--ink);margin:2px 0 8px;cursor:pointer;line-height:1.45}
+.ckrow input{width:18px;height:18px;flex:none;margin-top:1px;accent-color:#6a5cff}
 .del{flex:none;width:40px;height:40px;border-radius:12px;border:1px solid #f1d9de;background:#fff5f6;color:#e11d48;font-weight:900;cursor:pointer;transition:.2s}
 .del:hover{background:#ffe9ec}
 .pe{border:1px solid #e8eaf3;border-radius:16px;background:#fbfcff;overflow:hidden}
@@ -156,6 +159,7 @@ html.dark .notice{background:#141d3c;border-color:rgba(129,140,248,.35);color:#a
 html.dark .notice b{color:#b9c4ff}
 html.dark .sec{background:#121a33;border-color:rgba(255,255,255,.1)}
 html.dark .fld label{color:#8b96b8}
+html.dark .ckrow{color:#e8ecf8}
 html.dark .fld input,html.dark .fld textarea,html.dark .srow input,html.dark .srow select{background:#0d142a;border-color:rgba(255,255,255,.12);color:#e8ecf8}
 html.dark .fld input:focus,html.dark .fld textarea:focus,html.dark .srow input:focus,html.dark .srow select:focus{border-color:#4fb2ff}
 html.dark .nt{color:#8b96b8}
@@ -257,9 +261,13 @@ html.dark .tgl .i-moon{display:none}
 <div class="toast" id="toast" hidden></div>
 
 <script>
+const DEF_MUSIC={enabled:true,autoplay:true,volume:.55,tracks:[
+ {name:'Nhạc nền 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
+ {name:'Nhạc nền 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'}]};
 const DEF={subUrl:'',likeUrl:'',likeTitle:'Video cần like để tiếp tục vào web',notice:'',guide:'',pw:'Nguyenvan2010',
  name:'Nguyên Văn Cheat',badge:'2010 CHEAT VIỆT NAM',intro:'Chuyên chia sẻ hack cho anh em',avatar:'./avatar.png',
  socials:[['yt','https://www.youtube.com/@shirou36'],['tg','https://t.me/shirou36']],
+ music:DEF_MUSIC,
  posts:[1,2,3].map(n=>({id:'#00000'+n,title:'BÀI VIẾT MẪU '+n,body:'Nội dung các link sẽ hiện ra ở đây...',url:''}))};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -273,7 +281,8 @@ try{Object.assign(C,JSON.parse(localStorage.getItem('dh_cfg')||'{}'))}catch(e){}
 const SOC_OPTS=[['yt','YouTube'],['tg','Telegram'],['tt','TikTok'],['chat','Zalo'],['rocket','Website']];
 const fld=(l,id,v,ph='',t='input')=>`<div class="fld"><label for="${id}">${l}</label><${t} id="${id}" placeholder="${esc(ph)}" ${t==='input'?`value="${esc(v)}"`:''}>${t==='textarea'?esc(v):''}</${t}></div>`;
 const socRow=s=>`<div class="srow"><select class="s-type" aria-label="Loại liên kết">${SOC_OPTS.map(o=>`<option value="${o[0]}"${o[0]===s[0]?' selected':''}>${o[1]}</option>`).join('')}</select><input class="s-url" type="text" value="${esc(s[1])}" placeholder="https://..."><button class="del" type="button" onclick="this.closest('.srow').remove()" aria-label="Xoá liên kết">✕</button></div>`;
-const postEd=(p,open)=>`<details class="pe"${open?' open':''}><summary><span class="tag">${esc(p.id||'#')}</span><span>${esc(p.title)||'Bài viết mới'}</span></summary><div class="pc"><div class="fld"><label>Mã bài</label><input name="id" value="${esc(p.id)}" placeholder="#112400"></div><div class="fld"><label>Tiêu đề</label><input name="title" value="${esc(p.title)}" placeholder="GUNNY MOBI HACK"></div><div class="fld"><label>Ảnh bìa — hiện to phía trên bài (nên chọn ảnh ngang)</label><div class="uprow"><div class="cv-prev prev"${p.cover?'':' hidden'}><img src="${esc(p.cover||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-cover" type="button">📷 Chọn ảnh bìa</button><button class="btn ghost sm rm-cover" type="button">🗑️ Xoá ảnh bìa</button></div></div><input type="hidden" name="cover" value="${esc(p.cover||'')}"><input type="file" class="f-cover" accept="image/*" hidden></div><div class="fld"><label>Hoặc dán link ảnh / link YouTube</label><input class="cv-link" type="text" placeholder="https://youtu.be/... hoặc link ảnh .jpg/.png" value="${/^https?:/i.test(p.cover||'')?esc(p.cover):''}"></div><div class="fld"><label>Ảnh nhỏ — biểu tượng cạnh tên bài</label><div class="uprow"><div class="ic-prev prev"${p.icon?'':' hidden'}><img src="${esc(p.icon||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-icon" type="button">📷 Chọn ảnh nhỏ</button><button class="btn ghost sm rm-icon" type="button">🗑️ Xoá ảnh nhỏ</button></div></div><input type="hidden" name="icon" value="${esc(p.icon||'')}"><input type="file" class="f-icon" accept="image/*" hidden></div><div class="fld"><label>Hoặc dán link ảnh nhỏ / link YouTube</label><input class="ic-link" type="text" placeholder="https://... (ảnh vuông là đẹp)" value="${/^https?:/i.test(p.icon||'')?esc(p.icon):''}"></div><div class="fld2"><div class="fld"><label>Hệ điều hành (hdh)</label><input name="os" list="osList" value="${esc(p.os||'')}" placeholder="Android"></div><div class="fld"><label>Phiên bản</label><input name="ver" value="${esc(p.ver||'')}" placeholder="V1"></div><div class="fld"><label>Dung lượng</label><input name="size" value="${esc(p.size||'')}" placeholder="100MB"></div></div><div class="fld"><label>Link Get Key (bỏ trống = ẩn nút Get Key)</label><input name="keyUrl" value="${esc(p.keyUrl||'')}" placeholder="https://..."></div><div class="fld"><label>Tính năng (tuỳ chọn — hiện ở dải cuối bài)</label><input name="feat" value="${esc(p.feat||'')}" placeholder="ESP, AIM, TỰ TÌM TRẬN"></div><label class="chk"><input type="checkbox" name="isNew"${p.isNew?' checked':''}>🆕 Đánh dấu bài này là BÀI MỚI (hiện huy hiệu trên thẻ)</label><div class="fld"><label>Nội dung hiện trong popup khi bấm Tải Xuống</label><textarea name="body" placeholder="Link tải, mật khẩu giải nén, hướng dẫn...">${esc(p.body)}</textarea></div><div class="fld"><label>Link nút “Tải ngay” trong popup</label><input name="url" value="${esc(p.url)}" placeholder="https://..."></div><button class="btn ghost sm" type="button" onclick="this.closest('.pe').remove()">🗑️ Xoá bài này</button></div></details>`;
+const musRow=t=>`<div class="srow"><input class="m-name" type="text" value="${esc(t.name||'')}" placeholder="Tên bài (VD: Lofi chill)"><input class="m-url" type="text" value="${esc(t.url||'')}" placeholder="https://...mp3 hoặc https://youtu.be/..."><button class="del" type="button" onclick="this.closest('.srow').remove()" aria-label="Xoá bài nhạc">✕</button></div>`;
+const postEd=(p,open)=>`<details class="pe"${open?' open':''}><summary><span class="tag">${esc(p.id||'#')}</span><span>${esc(p.title)||'Bài viết mới'}</span></summary><div class="pc"><input type="hidden" name="createdAt" value="${p.createdAt||''}"><div class="fld"><label>Mã bài</label><input name="id" value="${esc(p.id)}" placeholder="#112400"></div><div class="fld"><label>Tiêu đề</label><input name="title" value="${esc(p.title)}" placeholder="GUNNY MOBI HACK"></div><div class="fld"><label>Ảnh bìa — hiện to phía trên bài (nên chọn ảnh ngang)</label><div class="uprow"><div class="cv-prev prev"${p.cover?'':' hidden'}><img src="${esc(p.cover||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-cover" type="button">📷 Chọn ảnh bìa</button><button class="btn ghost sm rm-cover" type="button">🗑️ Xoá ảnh bìa</button></div></div><input type="hidden" name="cover" value="${esc(p.cover||'')}"><input type="file" class="f-cover" accept="image/*" hidden></div><div class="fld"><label>Hoặc dán link ảnh / link YouTube</label><input class="cv-link" type="text" placeholder="https://youtu.be/... hoặc link ảnh .jpg/.png" value="${/^https?:/i.test(p.cover||'')?esc(p.cover):''}"></div><div class="fld"><label>Ảnh nhỏ — biểu tượng cạnh tên bài</label><div class="uprow"><div class="ic-prev prev"${p.icon?'':' hidden'}><img src="${esc(p.icon||'')}" alt=""></div><div class="upbtns"><button class="btn ghost sm pk-icon" type="button">📷 Chọn ảnh nhỏ</button><button class="btn ghost sm rm-icon" type="button">🗑️ Xoá ảnh nhỏ</button></div></div><input type="hidden" name="icon" value="${esc(p.icon||'')}"><input type="file" class="f-icon" accept="image/*" hidden></div><div class="fld"><label>Hoặc dán link ảnh nhỏ / link YouTube</label><input class="ic-link" type="text" placeholder="https://... (ảnh vuông là đẹp)" value="${/^https?:/i.test(p.icon||'')?esc(p.icon):''}"></div><div class="fld2"><div class="fld"><label>Hệ điều hành (hdh)</label><input name="os" list="osList" value="${esc(p.os||'')}" placeholder="Android"></div><div class="fld"><label>Phiên bản</label><input name="ver" value="${esc(p.ver||'')}" placeholder="V1"></div><div class="fld"><label>Dung lượng</label><input name="size" value="${esc(p.size||'')}" placeholder="100MB"></div></div><div class="fld"><label>Link Get Key (bỏ trống = ẩn nút Get Key)</label><input name="keyUrl" value="${esc(p.keyUrl||'')}" placeholder="https://..."></div><div class="fld"><label>Tính năng (tuỳ chọn — hiện ở dải cuối bài)</label><input name="feat" value="${esc(p.feat||'')}" placeholder="ESP, AIM, TỰ TÌM TRẬN"></div><label class="chk"><input type="checkbox" name="isNew"${p.isNew?' checked':''}>🆕 Đánh dấu bài này là BÀI MỚI (hiện huy hiệu trên thẻ)</label><div class="fld"><label>Nội dung hiện trong popup khi bấm Tải Xuống</label><textarea name="body" placeholder="Link tải, mật khẩu giải nén, hướng dẫn...">${esc(p.body)}</textarea></div><div class="fld"><label>Link nút “Tải ngay” trong popup</label><input name="url" value="${esc(p.url)}" placeholder="https://..."></div><button class="btn ghost sm" type="button" onclick="this.closest('.pe').remove()">🗑️ Xoá bài này</button></div></details>`;
 
 function pvUpdate(){
  const src=($('#a_avatar').value||'').trim();
@@ -288,6 +297,7 @@ function pvUpdate(){
  $('#topSub').textContent=($('#a_name').value||'').trim()||DEF.name;
 }
 function renderForm(){
+ const MU=(C.music&&typeof C.music==='object')?C.music:DEF_MUSIC;
  $('#form').innerHTML=`
  <section class="sec">
   <h4>📊 Thống kê thật</h4>
@@ -322,8 +332,17 @@ function renderForm(){
   <button class="btn ghost sm" id="addSoc" type="button">+ Thêm liên kết</button>
  </section>
  <section class="sec">
+  <h4>🎵 Nhạc nền</h4>
+  <p class="nt">Trình phát nhạc nổi ở góc trái dưới trang chủ. Dán link MP3 trực tiếp hoặc link YouTube cho từng bài — không cần up file nhạc. Link YouTube sẽ phát âm thanh (khung hình ẩn), video phải cho phép nhúng.</p>
+  <label class="ckrow"><input type="checkbox" id="a_mus_on"${MU.enabled!==false?' checked':''}> Bật nhạc nền (hiện nút 🎵 trên trang chủ)</label>
+  <label class="ckrow"><input type="checkbox" id="a_mus_auto"${MU.autoplay!==false?' checked':''}> Tự phát khi khách vào web (trình duyệt có thể đợi khách bấm lần đầu — web sẽ tự bật sau cú bấm đầu tiên)</label>
+  ${fld('Âm lượng mặc định (0–100)','a_mus_vol',MU.volume!=null?Math.round(MU.volume*100):55,'55')}
+  <div id="musRows" class="srows">${(MU.tracks||[]).map(musRow).join('')}</div>
+  <button class="btn ghost sm" id="addMus" type="button">+ Thêm bài nhạc</button>
+ </section>
+ <section class="sec">
   <h4>${ico('dl')}Bài viết</h4>
-  <p class="nt">Thẻ bài viết ngoài trang chủ gồm: ảnh bìa + huy hiệu hệ điều hành (hdh) + ảnh nhỏ + phiên bản | dung lượng + nút “Tải Xuống” (vẫn mở hộp chọn link như cũ) + nút “Get Key” (chỉ hiện khi có link) + dải tính năng (tuỳ chọn).</p>
+  <p class="nt">Thẻ bài viết ngoài trang chủ gồm: ảnh bìa + huy hiệu hệ điều hành (hdh) + ảnh nhỏ + phiên bản | dung lượng + nút “Tải Xuống” (vẫn mở hộp chọn link như cũ) + nút “Get Key” (chỉ hiện khi có link) + dải tính năng (tuỳ chọn). <b>Bài mới thêm luôn nằm đầu danh sách và tự đẩy lên đầu trang chủ.</b></p>
   <datalist id="osList"><option>Android</option><option>iOS</option><option>Android &amp; iOS</option><option>PC</option><option>Windows</option></datalist>
   <div id="pl" class="plist">${C.posts.map(p=>postEd(p)).join('')}</div>
   <button class="btn ghost sm" id="addP" type="button">+ Thêm bài mới</button>
@@ -401,10 +420,11 @@ function renderForm(){
   readImg(file,isCover?1000:144,!isCover,u=>{pe.querySelector('[name='+(isCover?'cover':'icon')+']').value=u;const lk=pe.querySelector(isCover?'.cv-link':'.ic-link');if(lk)lk.value='';const box=pe.querySelector(isCover?'.cv-prev':'.ic-prev');box.querySelector('img').src=u;box.hidden=false;toast(u.length>600000?'Ảnh hơi nặng — nên chọn ảnh nhỏ hơn':'Đã nạp ảnh ✔')});
  });
  $('#addSoc').onclick=()=>$('#socRows').insertAdjacentHTML('beforeend',socRow(['rocket','']));
+ $('#addMus').onclick=()=>$('#musRows').insertAdjacentHTML('beforeend',musRow({name:'',url:''}));
  $('#pl').oninput=e=>{const d=e.target.closest('.pe');if(!d)return;
   if(e.target.name==='title')d.querySelector('summary span:last-of-type').textContent=e.target.value||'Bài viết mới';
   if(e.target.name==='id')d.querySelector('.tag').textContent=e.target.value||'#'};
- $('#addP').onclick=()=>{$('#pl').insertAdjacentHTML('beforeend',postEd({id:'#',title:'',body:'',url:''},true));$('#pl').lastElementChild.scrollIntoView({behavior:'smooth',block:'center'})};
+ $('#addP').onclick=()=>{$('#pl').insertAdjacentHTML('afterbegin',postEd({id:'#',title:'',body:'',url:'',createdAt:Date.now()},true));$('#pl').firstElementChild.scrollIntoView({behavior:'smooth',block:'center'})};
  $('#stRefresh').onclick=loadStats;loadStats();
  pvUpdate();
 }
@@ -417,7 +437,14 @@ function collect(){
  C.notice=$('#a_notice').value.trim();
  C.guide=$('#a_guide').value.trim();
  C.socials=[...document.querySelectorAll('#socRows .srow')].map(r=>[r.querySelector('.s-type').value,r.querySelector('.s-url').value.trim()]).filter(s=>s[1]);
- C.posts=[...document.querySelectorAll('#pl .pe')].map(e=>{const g=n=>{const el=e.querySelector('[name='+n+']');return el?el.value:''};return{id:g('id').trim(),title:g('title').trim(),cover:g('cover'),icon:g('icon'),os:g('os').trim(),ver:g('ver').trim(),size:g('size').trim(),keyUrl:g('keyUrl').trim(),feat:g('feat').trim(),isNew:!!(e.querySelector('[name=isNew]')||{}).checked,body:g('body'),url:g('url').trim()}}).filter(p=>p.title||p.body||p.url||p.cover||p.icon||p.os||p.ver||p.size);
+ const mus=(C.music&&typeof C.music==='object')?C.music:{};
+ mus.enabled=!!$('#a_mus_on').checked;
+ mus.autoplay=!!$('#a_mus_auto').checked;
+ let mv=parseFloat($('#a_mus_vol').value);if(!isFinite(mv))mv=55;
+ mus.volume=Math.max(0,Math.min(100,mv))/100;
+ mus.tracks=[...document.querySelectorAll('#musRows .srow')].map(r=>({name:r.querySelector('.m-name').value.trim(),url:r.querySelector('.m-url').value.trim()})).filter(t=>t.url);
+ C.music=mus;
+ C.posts=[...document.querySelectorAll('#pl .pe')].map(e=>{const g=n=>{const el=e.querySelector('[name='+n+']');return el?el.value:''};return{createdAt:Number(g('createdAt'))||0,id:g('id').trim(),title:g('title').trim(),cover:g('cover'),icon:g('icon'),os:g('os').trim(),ver:g('ver').trim(),size:g('size').trim(),keyUrl:g('keyUrl').trim(),feat:g('feat').trim(),isNew:!!(e.querySelector('[name=isNew]')||{}).checked,body:g('body'),url:g('url').trim()}}).filter(p=>p.title||p.body||p.url||p.cover||p.icon||p.os||p.ver||p.size);
  const np=$('#a_pw').value;if(np)C.pw=np;
 }
 /* ---- Thống kê thật (abacus — mạng lỗi thì hiện dấu –, web vẫn bình thường) ---- */
@@ -522,6 +549,8 @@ requestAnimationFrame(function bootTick(now){
 (async()=>{
  try{const r=await Promise.race([fetch('config.json',{cache:'no-cache'}),new Promise((_,j)=>setTimeout(j,2500))]);if(r&&r.ok){const j=await r.json();delete j.pw;Object.assign(C,j)}}catch(e){}
  try{const l=JSON.parse(localStorage.getItem('dh_cfg')||'{}');delete l.pw;Object.assign(C,l)}catch(e){}
+ if(!C.music||typeof C.music!=='object')C.music=JSON.parse(JSON.stringify(DEF_MUSIC));
+ if(!Array.isArray(C.music.tracks))C.music.tracks=[];
  let ok=false;try{ok=sessionStorage.getItem('dh_admin_ok')==='1'}catch(e){}
  if(ok)showAdmin();
  else if(location.hash==='#login')openLogin();

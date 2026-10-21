@@ -15,7 +15,6 @@
  document.addEventListener('contextmenu',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Chuột phải làm gì đấy? 😏','Định soi gì thế bạn? 😜','Ơ, chuột phải à? Làm gì vậy e 😏']))});
  document.addEventListener('copy',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Copy gì thế? Không cho đâu 😜','Tính lấy bài của tôi à? 😏','Định copy source à? Làm gì vậy e 😏']))});
  document.addEventListener('cut',function(e){if(isOk(e))return;e.preventDefault();say('Cắt gì thế? Không cho đâu 😜')});
- document.addEventListener('selectstart',function(e){if(isOk(e))return;e.preventDefault();say(pick(['Bôi đen làm gì vậy? 😏','Định copy à? Không dễ đâu nha 😜']))});
  document.addEventListener('dragstart',function(e){if(!isOk(e)){e.preventDefault();say('Kéo ảnh đi đâu đấy? 😏')}},true);
  document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();var cmd=e.ctrlKey||e.metaKey;
   if(k==='f12'||(cmd&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k'))||(cmd&&(k==='u'||k==='s'))){
@@ -91,6 +90,10 @@ h1{font-size:20px;font-weight:900;text-align:center;letter-spacing:-.2px}
 .vid{display:flex;gap:14px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:20px;background:#f9fafe}
 .thumb{position:relative;flex:none;width:112px;height:66px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#eef1ff,#e8f7ff);display:grid;place-items:center;color:#e11d48}
 .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid.big{display:block;padding:10px}
+.vid.big .thumb{width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;margin-bottom:10px}
+.vid.big #vTitle{font-size:15px}
 .thumb .i{position:relative;width:32px;height:32px}
 .vid b{display:block;font-size:14.5px;line-height:1.35}
 .vid small{color:var(--mut);font-size:13px;word-break:break-all}
@@ -268,6 +271,57 @@ html.dark .totop{background:rgba(20,28,54,.9);border-color:rgba(255,255,255,.14)
 html.dark .lcount{background:rgba(99,102,241,.16);border-color:rgba(129,140,248,.4);color:#b9c4ff}
 html.dark .helpbtn{background:rgba(20,28,54,.9);border-color:rgba(255,255,255,.14);color:#cfd8f5}
 
+/* ===== Trình phát nhạc nền ===== */
+.mus{position:fixed;left:14px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:66;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.musbtn{position:relative;width:48px;height:48px;border-radius:50%;border:1px solid #e3e6f2;background:rgba(255,255,255,.94);color:#5b4bdc;display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 28px rgba(23,32,73,.18);backdrop-filter:blur(8px);transition:transform .15s;animation:up .3s both}
+.musbtn:hover{transform:translateY(-2px)}
+.musbtn:active{transform:scale(.94)}
+.musbtn .i{width:21px;height:21px}
+.musbtn .museq{position:absolute;right:-3px;top:-3px;display:none;align-items:flex-end;gap:2px;height:15px;padding:3px 4px;border-radius:8px;background:#6d5efc;box-shadow:0 4px 10px rgba(109,94,252,.42)}
+.musbtn .museq i{width:2.5px;background:#fff;border-radius:2px;height:4px;animation:museq .9s ease-in-out infinite}
+.musbtn .museq i:nth-child(2){animation-delay:.22s}
+.musbtn .museq i:nth-child(3){animation-delay:.44s}
+.musbtn .museq.on{display:flex}
+@keyframes museq{0%,100%{height:4px}50%{height:10px}}
+.musbtn.want::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(109,94,252,.55);animation:musring 1.6s ease-out infinite}
+@keyframes musring{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.muspanel{width:min(304px,calc(100vw - 28px));background:rgba(255,255,255,.97);border:1px solid #e3e6f2;border-radius:20px;box-shadow:0 18px 50px rgba(23,32,73,.24);backdrop-filter:blur(16px);padding:13px 14px 12px;transform-origin:bottom left;animation:muspop .18s ease}
+@keyframes muspop{from{opacity:0;transform:translateY(8px) scale(.97)}}
+.mushead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mushead span{font-size:11.5px;font-weight:800;letter-spacing:.4px;color:var(--mut);text-transform:uppercase}
+.musx{border:0;background:transparent;color:var(--mut);font-size:16px;line-height:1;cursor:pointer;padding:3px 6px;border-radius:8px}
+.musx:hover{background:rgba(109,94,252,.1);color:#5b4bdc}
+.mustitle{font-size:14px;font-weight:800;line-height:1.35;margin:7px 0 10px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.musrange,.musseek{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:rgba(109,94,252,.18);outline:0;cursor:pointer}
+.musseek{background:linear-gradient(90deg,#6d5efc var(--p,0%),rgba(109,94,252,.18) var(--p,0%));margin:2px 0 5px}
+.musrange::-webkit-slider-thumb,.musseek::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#6d5efc;border:0;box-shadow:0 2px 6px rgba(109,94,252,.45)}
+.musrange::-moz-range-thumb,.musseek::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#6d5efc;border:0;box-shadow:0 2px 6px rgba(109,94,252,.45)}
+.mustime{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);font-weight:700;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.musctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:9px}
+.musctrl button{border:0;background:transparent;color:#4b5563;cursor:pointer;display:grid;place-items:center;padding:6px;border-radius:12px;transition:background .15s,color .15s}
+.musctrl button:hover{background:rgba(109,94,252,.1);color:#5b4bdc}
+.musctrl .i{width:20px;height:20px}
+.musctrl .mplay{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7c6cff,#5b4bdc);color:#fff;box-shadow:0 8px 18px rgba(91,75,220,.35)}
+.musctrl .mplay:hover{color:#fff;background:linear-gradient(135deg,#8b7dff,#6a5bea)}
+.musctrl .mplay .i{width:22px;height:22px}
+.musvol{display:flex;align-items:center;gap:9px;padding-top:9px;border-top:1px dashed var(--line)}
+.musvol .i{width:16px;height:16px;color:var(--mut)}
+.muslist{margin-top:9px;max-height:112px;overflow:auto;border-top:1px dashed var(--line);padding-top:6px;display:flex;flex-direction:column;gap:2px}
+.muslist:empty{display:none}
+.muslist button{border:0;background:transparent;text-align:left;padding:6px 8px;border-radius:9px;font:inherit;font-size:12.5px;color:var(--ink);cursor:pointer;display:flex;gap:7px;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.muslist button:hover{background:rgba(109,94,252,.1)}
+.muslist button.on{background:rgba(109,94,252,.14);color:#5b4bdc;font-weight:800}
+.muslist .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55;flex:none}
+.musyt{position:fixed;left:14px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:2px;height:2px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
+html.dark .musbtn{background:rgba(20,28,54,.9);border-color:rgba(255,255,255,.14);color:#b9a8ff}
+html.dark .muspanel{background:rgba(17,24,48,.97);border-color:rgba(255,255,255,.12)}
+html.dark .mustitle{color:#eef2ff}
+html.dark .musctrl button{color:#cfd8f5}
+html.dark .muslist button{color:#dbe3ff}
+html.dark .muslist button.on{color:#b9a8ff;background:rgba(124,108,255,.2)}
+html.dark .musrange,html.dark .musseek{background-color:rgba(124,108,255,.22)}
+html.dark .musseek{background:linear-gradient(90deg,#8b7dff var(--p,0%),rgba(124,108,255,.22) var(--p,0%))}
+
 /* ===== Số liệu bấm chạy lại + hiệu ứng ảnh đại diện ===== */
 .stats{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .18s}
 .stats:active{transform:scale(.985)}
@@ -404,6 +458,12 @@ html.dark .tgl .i-moon{display:none}
 <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-3.9-3.9"/></g></symbol>
 <symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.6 6.6-4.2M8.7 13.4l6.6 4.2"/></g></symbol>
 <symbol id="i-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6m0 0-5.5 5.5M12 6l5.5 5.5"/></g></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></g></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><g fill="currentColor"><path d="M6.5 5H9v14H6.5z"/><path d="M20 5.5v13L9.5 12z"/></g></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><g fill="currentColor"><path d="M15 5h2.5v14H15z"/><path d="M4 5.5v13L14.5 12z"/></g></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L13 5v14L7.5 14.5H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></g></symbol>
 </svg>
 
 <div id="boot">
@@ -425,20 +485,20 @@ html.dark .tgl .i-moon{display:none}
   <div class="step" id="s1">
    <div class="orb red"><svg class="i"><use href="#i-yt"/></svg></div>
    <h1>Bước 1 · Đăng ký kênh</h1>
-   <p class="lead">Bấm nút bên dưới và <span class="chip red"><svg class="i"><use href="#i-yt"/></svg>ĐĂNG KÝ</span> kênh YouTube của chúng tôi để tiếp tục nhé!<br>Cảm ơn bạn đã ủng hộ ❤️</p>
+   <p class="lead">Bấm nút bên dưới, <span class="chip red"><svg class="i"><use href="#i-yt"/></svg>ĐĂNG KÝ</span> kênh YouTube của chúng tôi và ở lại ít nhất 4 giây để tiếp tục nhé!<br>Cảm ơn bạn đã ủng hộ ❤️</p>
    <a class="btn red" id="subBtn" target="_blank" rel="noopener"><svg class="i"><use href="#i-yt"/></svg>Đăng ký kênh ngay</a>
    <button class="btn mint" id="subOk" disabled><svg class="i"><use href="#i-ok"/></svg>Tôi đã đăng ký</button>
-   <p class="hint" id="subHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Đăng ký kênh ngay” trước, sau đó quay lại bấm “Tôi đã đăng ký”.</span></p>
+   <p class="hint" id="subHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Đăng ký kênh ngay”, ở lại YouTube ít nhất 4 giây rồi quay lại. Nút xác nhận sẽ tự mở khoá.</span></p>
   </div>
 
   <div class="step" id="s2" hidden>
    <div class="orb grn"><svg class="i"><use href="#i-like"/></svg></div>
    <h1>Bước 2 · Like video</h1>
-   <p class="lead">Hãy <span class="chip grn"><svg class="i"><use href="#i-like"/></svg>LIKE</span> video YouTube dưới đây để hoàn tất xác minh.</p>
+   <p class="lead">Hãy mở video, <span class="chip grn"><svg class="i"><use href="#i-like"/></svg>LIKE</span> và ở lại YouTube ít nhất 4 giây để hoàn tất xác minh.</p>
    <div class="vid"><div class="thumb" id="thumb"></div><div><b id="vTitle"></b><small id="vUrl"></small></div></div>
    <a class="btn grn" id="likeBtn" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#10c98a,#059669);color:#fff;box-shadow:0 10px 26px rgba(5,150,105,.3)"><svg class="i"><use href="#i-like"/></svg>Mở video &amp; Like ngay</a>
    <button class="btn mint" id="likeOk" disabled><svg class="i"><use href="#i-ok"/></svg>Tôi đã Like (Tiếp tục)</button>
-   <p class="hint" id="likeHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Mở video &amp; Like ngay”, sau đó quay lại đây bấm nút tiếp tục.</span></p>
+   <p class="hint" id="likeHint"><svg class="i"><use href="#i-clock"/></svg><span>Bấm “Mở video &amp; Like ngay”, ở lại YouTube ít nhất 4 giây rồi quay lại. Nút tiếp tục sẽ tự mở khoá.</span></p>
   </div>
  </section>
 </main>
@@ -486,10 +546,32 @@ html.dark .tgl .i-moon{display:none}
 <button class="totop" id="toTop" type="button" hidden aria-label="Lên đầu trang" title="Lên đầu trang"><svg class="i"><use href="#i-up"/></svg></button>
 <button class="helpbtn" id="helpBtn" type="button" hidden aria-label="Hướng dẫn sử dụng" title="Hướng dẫn sử dụng"><svg class="i"><use href="#i-help"/></svg></button>
 
+<div class="mus" id="mus" hidden>
+ <button class="musbtn" id="musBtn" type="button" aria-label="Nhạc nền" title="Nhạc nền"><svg class="i"><use href="#i-note"/></svg><span class="museq" id="musEq" aria-hidden="true"><i></i><i></i><i></i></span></button>
+ <div class="muspanel" id="musPanel" hidden>
+  <div class="mushead"><span>🎵 Nhạc nền</span><button class="musx" id="musX" type="button" aria-label="Đóng">✕</button></div>
+  <div class="mustitle" id="musTitle">—</div>
+  <input class="musseek" id="musSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Tua bài">
+  <div class="mustime"><span id="musCur">0:00</span><span id="musDur">0:00</span></div>
+  <div class="musctrl">
+   <button id="musPrev" type="button" aria-label="Bài trước"><svg class="i"><use href="#i-prev"/></svg></button>
+   <button class="mplay" id="musPlay" type="button" aria-label="Phát / Tạm dừng"><svg class="i"><use href="#i-play"/></svg></button>
+   <button id="musNext" type="button" aria-label="Bài sau"><svg class="i"><use href="#i-next"/></svg></button>
+  </div>
+  <div class="musvol"><svg class="i"><use href="#i-vol"/></svg><input class="musrange" id="musVol" type="range" min="0" max="100" value="55" aria-label="Âm lượng"></div>
+  <div class="muslist" id="musList"></div>
+ </div>
+</div>
+<div class="musyt" id="musYt" aria-hidden="true"></div>
+
 <script>
+const DEF_MUSIC={enabled:true,autoplay:true,volume:.55,tracks:[
+ {name:'Nhạc nền 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
+ {name:'Nhạc nền 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'}]};
 const DEF={subUrl:'',likeUrl:'',likeTitle:'Video cần like để tiếp tục vào web',notice:'',guide:'',
  name:'Nguyên Văn Cheat',badge:'2010 CHEAT VIỆT NAM',intro:'Chuyên chia sẻ hack cho anh em',avatar:'./avatar.png',
  socials:[['yt','https://www.youtube.com/@shirou36'],['tg','https://t.me/shirou36']],
+ music:DEF_MUSIC,
  posts:[1,2,3].map(n=>({id:'#00000'+n,title:'BÀI VIẾT MẪU '+n,body:'Nội dung các link sẽ hiện ra ở đây...',url:''}))};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -500,6 +582,77 @@ const SOC_NAME={yt:'YouTube',tg:'Telegram',tt:'TikTok',chat:'Zalo',rocket:'Websi
 let C=JSON.parse(JSON.stringify(DEF)),S={sub:0,like:0},pq='',po='';
 try{Object.assign(S,JSON.parse(sessionStorage.getItem('dh_st')||'{}'))}catch(e){}
 const saveS=()=>{try{sessionStorage.setItem('dh_st',JSON.stringify(S))}catch(e){}};
+/* ---- Xác minh nghiêm ngặt: phải mở YouTube và ở lại đủ lâu ---- */
+const VF_MIN_AWAY=4000, VF_MIN_TOTAL=6000;
+/* Dự phòng khi config.json / bản lưu cũ bị thiếu link xác minh */
+const VF_FALLBACK={
+ sub:'https://www.youtube.com/@nguyevancheat',
+ like:'https://youtu.be/CXxVdYXiGMA?si=Eyo4bICRGDCcW4Md'
+};
+const vfUrl=k=>safe(C[k+'Url'])||VF_FALLBACK[k];
+const VF={
+ sub:{clickAt:0,away:0,awayStart:0,ready:false,active:false},
+ like:{clickAt:0,away:0,awayStart:0,ready:false,active:false}
+};
+let vfTimer=null,vfAwayStart=0;
+const vfBtn=k=>k==='sub'?$('#subOk'):$('#likeOk');
+const vfHintEl=k=>k==='sub'?$('#subHint'):$('#likeHint');
+const vfLabel=k=>k==='sub'?'Tôi đã đăng ký':'Tôi đã Like (Tiếp tục)';
+const vfActive=()=>VF.sub.active||VF.like.active;
+function vfMarkAway(){
+ if(vfAwayStart)return;
+ vfAwayStart=Date.now();
+ ['sub','like'].forEach(k=>{if(VF[k].active&&!VF[k].ready)VF[k].awayStart=vfAwayStart});
+}
+function vfAddAway(){
+ if(!vfAwayStart)return;
+ const d=Date.now()-vfAwayStart;
+ vfAwayStart=0;
+ ['sub','like'].forEach(k=>{const v=VF[k];if(v.active&&!v.ready){v.away+=d;v.awayStart=0;vfUpdate(k)}});
+}
+function vfEnsureTimer(){
+ if(vfTimer)return;
+ vfTimer=setInterval(()=>{
+  ['sub','like'].forEach(k=>{if(VF[k].active&&!VF[k].ready)vfUpdate(k)});
+  if(!vfActive()){clearInterval(vfTimer);vfTimer=null}
+ },250);
+}
+function vfUpdate(k){
+ const v=VF[k],btn=vfBtn(k),h=vfHintEl(k);
+ if(!btn||!v.active)return;
+ if(v.ready){
+  btn.disabled=false;btn.innerHTML=ico('ok')+vfLabel(k);
+  h.className='hint ok';h.innerHTML=ico('ok')+`<span>Đã ghi nhận! Bấm “${vfLabel(k)}” để tiếp tục.</span>`;
+  return;
+ }
+ const away=v.away+(v.awayStart?Date.now()-v.awayStart:0);
+ const total=v.clickAt?Date.now()-v.clickAt:0;
+ const awayLeft=Math.max(0,Math.ceil((VF_MIN_AWAY-away)/1000));
+ const totalLeft=Math.max(0,Math.ceil((VF_MIN_TOTAL-total)/1000));
+ if(awayLeft>0){
+  btn.disabled=true;btn.innerHTML=ico('clock')+`Cần thêm ${awayLeft}s trên YouTube`;
+  h.className='hint';h.innerHTML=ico('clock')+`<span>Bạn cần ở lại YouTube thêm ${awayLeft} giây. Bấm lại “${k==='sub'?'Đăng ký kênh ngay':'Mở video & Like ngay'}” nếu chưa đủ.</span>`;
+  return;
+ }
+ if(totalLeft>0){
+  btn.disabled=true;btn.innerHTML=ico('clock')+`Đang xác minh (${totalLeft}s)`;
+  h.className='hint';h.innerHTML=ico('clock')+`<span>Đã ghi nhận thời gian trên YouTube. Chờ thêm ${totalLeft} giây để hoàn tất xác minh...</span>`;
+  return;
+ }
+ v.ready=true;v.active=false;
+ btn.disabled=false;btn.innerHTML=ico('ok')+vfLabel(k);
+ h.className='hint ok';h.innerHTML=ico('ok')+`<span>Đã ghi nhận! Bấm “${vfLabel(k)}” để tiếp tục.</span>`;
+}
+function vfBegin(k){
+ const v=VF[k];if(v.ready)return;
+ if(!v.active){v.active=true;v.clickAt=Date.now();v.away=0;v.awayStart=vfAwayStart||0}
+ vfUpdate(k);vfEnsureTimer();
+}
+function vfLeave(){vfMarkAway()}
+function vfReturn(){vfAddAway();if(!vfActive()){clearInterval(vfTimer);vfTimer=null}}
+addEventListener('blur',vfLeave);
+addEventListener('focus',vfReturn);
+document.addEventListener('visibilitychange',()=>{document.hidden?vfLeave():vfReturn()});
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
 /* ---- Thống kê thật (abacus — mạng lỗi thì im lặng bỏ qua, không ảnh hưởng web) ---- */
 const STAT_NS='nguyenvancheat-web';
@@ -529,20 +682,18 @@ function route(){
  d1.textContent=S.sub?'✓':'1';d1.className='sdot '+(S.sub?'done':'on');
  d2.textContent=S.like?'✓':'2';d2.className='sdot '+(S.sub?(S.like?'done':'on'):'');
  $('#railFill').style.width=S.sub?(S.like?'100%':'55%'):'0%';
- $('#subBtn').href=safe(C.subUrl)||'#';$('#likeBtn').href=safe(C.likeUrl)||'#';
- const m=(C.likeUrl||'').match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);
- $('#thumb').innerHTML=(m?`<img src="https://i.ytimg.com/vi/${m[1]}/hqdefault.jpg" alt="" onerror="this.remove()">`:'')+ico('yt');
+ $('#subBtn').href=vfUrl('sub');$('#likeBtn').href=vfUrl('like');
+ const likeUrl=vfUrl('like');
+ const m=likeUrl.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);
+ const vb=$('#thumb').closest('.vid');
+ if(m){vb.classList.add('big');$('#thumb').innerHTML='<iframe src="https://www.youtube.com/embed/'+m[1]+'?rel=0" title="Video YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>'}
+ else{vb.classList.remove('big');$('#thumb').innerHTML=ico('yt')}
  $('#vTitle').textContent=C.likeTitle||DEF.likeTitle;
- $('#vUrl').textContent=(C.likeUrl||'').replace(/^https?:\/\//,'');
-}
-function ready(btn,hint,label){
- $(btn).disabled=false;
- const h=$(hint);h.className='hint ok';
- h.innerHTML=ico('ok')+`<span>Tuyệt! Bây giờ bấm “${label}” để tiếp tục${hint==='#likeHint'?' vào web':''}.</span>`;
+ $('#vUrl').textContent=likeUrl.replace(/^https?:\/\//,'');
 }
 function openLink(kind){return e=>{
- if(!safe(C[kind+'Url'])){e.preventDefault();toast('Admin chưa cài link này')}else statHit(kind);
- kind==='sub'?ready('#subOk','#subHint','Tôi đã đăng ký'):ready('#likeOk','#likeHint','Tôi đã Like');
+ if(!vfUrl(kind)){e.preventDefault();toast('Admin chưa cài link này');return}
+ statHit(kind);vfBegin(kind);
 }}
 $('#subBtn').onclick=openLink('sub');$('#likeBtn').onclick=openLink('like');
 $('#subOk').onclick=()=>{S.sub=1;saveS();route()};
@@ -605,6 +756,7 @@ function postCardHTML(o){
 }
 function renderPosts(){
  const all=C.posts.map((p,i)=>({p,i})).filter(o=>o.p&&(o.p.title||o.p.body||o.p.url||o.p.cover||o.p.icon||o.p.os||o.p.ver||o.p.size));
+ all.sort((a,b)=>((Number(b.p.createdAt)||0)-(Number(a.p.createdAt)||0))||(b.i-a.i));
  const kinds=[],seen={};
  all.forEach(o=>{const raw=safeT(o.p.os);if(!raw)return;const k=osKind(raw);if(!seen[k]){seen[k]=1;kinds.push(k)}});
  if(po&&kinds.indexOf(po)<0)po='';
@@ -704,6 +856,192 @@ if(themeBtn)themeBtn.onclick=()=>{
  if(metaTheme)metaTheme.content=d?'#0a101f':'#f5f6fb';
 };
 
+/* ---- Trình phát nhạc nền: MP3 trực tiếp hoặc link YouTube ---- */
+const MUS={i:0,playing:false,want:false,vol:.55,mode:'audio',audio:null,ytP:null,tick:null,loadId:0,req:0};
+let ytApiP=null,musHinted=false;
+const musTracks=()=>{const m=C.music;return m&&Array.isArray(m.tracks)?m.tracks.filter(t=>t&&safe(t.url)):[]};
+const ytIdOf=u=>{const m=String(u||'').match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:''};
+const fmtT=s=>{if(!isFinite(s)||s<0)s=0;s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function musSave(){try{localStorage.setItem('dh_mus',JSON.stringify({i:MUS.i,playing:MUS.playing,vol:MUS.vol}))}catch(e){}}
+function musBtnUI(){
+ const tr=musTracks()[MUS.i];
+ const eq=$('#musEq');if(eq)eq.classList.toggle('on',MUS.playing);
+ const pb=$('#musPlay');if(pb)pb.innerHTML=ico(MUS.playing?'pause':'play');
+ const t=$('#musTitle');if(t)t.textContent=tr?(tr.name||('Bài '+(MUS.i+1))):'—';
+ const l=$('#musList');if(l)l.querySelectorAll('button').forEach((b,k)=>b.classList.toggle('on',k===MUS.i));
+ const mb=$('#musBtn');if(mb)mb.classList.toggle('want',!!(MUS.want&&!MUS.playing));
+}
+function musTime(cur,dur){
+ const ok=isFinite(dur)&&dur>0;
+ const pc=ok?Math.max(0,Math.min(100,cur/dur*100)):0;
+ const s=$('#musSeek');
+ if(s){s.style.setProperty('--p',pc+'%');if(document.activeElement!==s)s.value=Math.round(pc*10)}
+ const c=$('#musCur');if(c)c.textContent=fmtT(cur);
+ const d=$('#musDur');if(d)d.textContent=ok?fmtT(dur):'--:--';
+}
+function musStop(){
+ MUS.req++;
+ if(MUS.audio){try{MUS.audio.pause()}catch(e){}MUS.audio.onerror=null;MUS.audio.src='';MUS.audio=null}
+ if(MUS.ytP){try{MUS.ytP.destroy()}catch(e){}MUS.ytP=null}
+ MUS.audio=null;MUS.ytP=null;MUS.playing=false;
+ clearInterval(MUS.tick);MUS.tick=null;
+ const box=$('#musYt');if(box)box.innerHTML='';
+}
+function musPlayAudio(auto){
+ const a=MUS.audio;if(!a)return;
+ const id=++MUS.req;MUS.want=true;musBtnUI();
+ let p;try{p=a.play()}catch(e){p=Promise.reject(e)}
+ Promise.resolve(p).then(()=>{
+  if(id!==MUS.req)return;
+  MUS.playing=true;musBtnUI();musSave();
+ }).catch(()=>{
+  if(id!==MUS.req)return;
+  MUS.playing=false;
+  if(!auto){MUS.want=false;if(!musHinted){musHinted=true;toast('Bấm vào trang để bật nhạc 🎵')}}
+  musBtnUI();
+ });
+}
+function loadYtApi(){
+ if(window.YT&&window.YT.Player)return Promise.resolve();
+ if(ytApiP)return ytApiP;
+ ytApiP=new Promise((res,rej)=>{
+  let done=false;const fin=ok=>{if(done)return;done=true;ok?res():rej(new Error('yt'))};
+  const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';s.async=true;
+  s.onerror=()=>fin(false);
+  window.onYouTubeIframeAPIReady=()=>fin(true);
+  document.head.appendChild(s);
+  setTimeout(()=>fin(!!(window.YT&&window.YT.Player)),14000);
+ });
+ return ytApiP;
+}
+function musTickYt(){
+ clearInterval(MUS.tick);
+ MUS.tick=setInterval(()=>{
+  if(!MUS.ytP||!MUS.ytP.getCurrentTime)return;
+  let c=0,d=0;try{c=MUS.ytP.getCurrentTime()||0;d=MUS.ytP.getDuration()||0}catch(e){}
+  musTime(c,d);
+ },500);
+}
+function musBuildYt(id){
+ const box=$('#musYt');if(!box||!window.YT||!YT.Player)return;
+ box.innerHTML='';
+ const el=document.createElement('div');el.id='musYtFrame';box.appendChild(el);
+ MUS.ytP=new YT.Player(el,{height:'2',width:'2',videoId:id,playerVars:{autoplay:0,controls:0,disablekb:1,playsinline:1,rel:0},events:{
+  onReady:function(){
+   try{MUS.ytP.setVolume(Math.round(MUS.vol*100))}catch(e){}
+   if(MUS.want){try{MUS.ytP.playVideo()}catch(e){}}
+  },
+  onStateChange:function(e){
+   const St=window.YT.PlayerState;
+   if(e.data===St.PLAYING){MUS.playing=true;MUS.want=true;musBtnUI();musSave();musTickYt()}
+   else if(e.data===St.PAUSED){MUS.playing=false;clearInterval(MUS.tick);musBtnUI();musSave()}
+   else if(e.data===St.ENDED){musNext()}
+  },
+  onError:function(){toast('Không phát được bài này 😢');MUS.playing=false;MUS.want=false;musBtnUI()}
+ }});
+}
+function musLoad(i,autoplay){
+ const list=musTracks();if(!list.length)return;
+ MUS.i=((i%list.length)+list.length)%list.length;
+ musStop();
+ const token=++MUS.loadId;
+ const tr=list[MUS.i];
+ MUS.mode=ytIdOf(tr.url)?'yt':'audio';
+ MUS.want=!!autoplay;
+ musTime(0,0);musBtnUI();
+ if(MUS.mode==='yt'){
+  if(!autoplay)return;
+  loadYtApi().then(()=>{if(token===MUS.loadId&&MUS.mode==='yt'&&MUS.want)musBuildYt(ytIdOf(tr.url))}).catch(()=>{if(token!==MUS.loadId)return;toast('Mạng không tải được YouTube 😢');MUS.want=false;musBtnUI()});
+ }else{
+  const a=new Audio(tr.url);a.preload='metadata';a.volume=MUS.vol;MUS.audio=a;
+  a.addEventListener('loadedmetadata',()=>musTime(a.currentTime,a.duration||0));
+  a.addEventListener('timeupdate',()=>musTime(a.currentTime,a.duration||0));
+  a.addEventListener('ended',musNext);
+  a.addEventListener('error',()=>{toast('Không phát được bài này 😢');MUS.playing=false;MUS.want=false;musBtnUI()});
+  if(autoplay)musPlayAudio(true);
+ }
+}
+function musPlay(){
+ const list=musTracks();if(!list.length)return;
+ const tr=list[MUS.i];
+ MUS.want=true;musBtnUI();
+ if(MUS.mode==='yt'){
+  if(MUS.ytP&&MUS.ytP.playVideo){try{MUS.ytP.playVideo()}catch(e){}}
+  else{loadYtApi().then(()=>{if(!MUS.ytP)musBuildYt(ytIdOf(tr.url));else try{MUS.ytP.playVideo()}catch(e){}}).catch(()=>{toast('Mạng không tải được YouTube 😢');MUS.want=false;musBtnUI()})}
+ }else{
+  if(!MUS.audio)musLoad(MUS.i,false);
+  if(MUS.audio)musPlayAudio(false);
+ }
+}
+function musPause(){
+ MUS.want=false;MUS.req++;
+ if(MUS.audio){try{MUS.audio.pause()}catch(e){}}
+ if(MUS.ytP&&MUS.ytP.pauseVideo){try{MUS.ytP.pauseVideo()}catch(e){}}
+ MUS.playing=false;clearInterval(MUS.tick);musBtnUI();musSave();
+}
+function musNext(){musLoad(MUS.i+1,MUS.playing||MUS.want)}
+function musPrev(){musLoad(MUS.i-1,MUS.playing||MUS.want)}
+function musSeek(f){
+ const tr=musTracks()[MUS.i];if(!tr)return;
+ if(MUS.mode==='yt'&&MUS.ytP&&MUS.ytP.getDuration){
+  let d=0;try{d=MUS.ytP.getDuration()||0}catch(e){}
+  if(d>0){try{MUS.ytP.seekTo(d*f,true)}catch(e){}musTime(d*f,d)}
+ }else if(MUS.audio&&isFinite(MUS.audio.duration)&&MUS.audio.duration>0){
+  try{MUS.audio.currentTime=MUS.audio.duration*f}catch(e){}
+  musTime(MUS.audio.currentTime,MUS.audio.duration);
+ }
+}
+function musInit(){
+ const box=$('#mus');if(!box)return;
+ const m=C.music||{},list=musTracks();
+ if(m.enabled===false||!list.length){box.hidden=true;return}
+ box.hidden=false;
+ let st={};try{st=JSON.parse(localStorage.getItem('dh_mus')||'{}')}catch(e){}
+ if(typeof st.vol==='number'&&isFinite(st.vol))MUS.vol=Math.max(0,Math.min(1,st.vol));
+ else{MUS.vol=parseFloat(m.volume);if(!isFinite(MUS.vol))MUS.vol=.55;MUS.vol=Math.max(0,Math.min(1,MUS.vol))}
+ if(Number.isInteger(st.i)&&st.i>=0&&st.i<list.length)MUS.i=st.i;
+ if(MUS.i>=list.length)MUS.i=0;
+ const l=$('#musList');
+ l.innerHTML=list.map((t,k)=>'<button type="button" data-k="'+k+'"><span class="dot"></span>'+esc(t.name||('Bài '+(k+1)))+'</button>').join('');
+ l.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>musLoad(+b.dataset.k,true)));
+ const vol=$('#musVol');vol.value=Math.round(MUS.vol*100);
+ vol.addEventListener('input',e=>{
+  MUS.vol=Math.max(0,Math.min(1,+e.target.value/100));
+  if(MUS.audio)MUS.audio.volume=MUS.vol;
+  if(MUS.ytP&&MUS.ytP.setVolume){try{MUS.ytP.setVolume(Math.round(MUS.vol*100))}catch(x){}}
+  musSave();
+ });
+ const seek=$('#musSeek');
+ seek.addEventListener('input',()=>{
+  let d=0;
+  if(MUS.mode==='yt'&&MUS.ytP&&MUS.ytP.getDuration){try{d=MUS.ytP.getDuration()||0}catch(e){}}
+  else if(MUS.audio&&isFinite(MUS.audio.duration))d=MUS.audio.duration;
+  musTime(d*(+seek.value/1000),d);
+ });
+ seek.addEventListener('change',()=>musSeek(+seek.value/1000));
+ $('#musPlay').addEventListener('click',()=>{MUS.playing?musPause():musPlay()});
+ $('#musPrev').addEventListener('click',musPrev);
+ $('#musNext').addEventListener('click',musNext);
+ $('#musX').addEventListener('click',()=>{$('#musPanel').hidden=true});
+ $('#musBtn').addEventListener('click',()=>{const p=$('#musPanel');p.hidden=!p.hidden;musBtnUI()});
+ document.addEventListener('pointerdown',e=>{const p=$('#musPanel');if(p&&!p.hidden&&e.target&&e.target.closest&&!e.target.closest('#mus'))p.hidden=true},{passive:true});
+ musLoad(MUS.i,false);
+ musBtnUI();
+ const auto=(m.autoplay!==false)&&st.playing!==false;
+ if(auto){
+  MUS.want=true;musBtnUI();
+  const kick=()=>{
+   document.removeEventListener('pointerdown',kick,true);
+   document.removeEventListener('keydown',kick,true);
+   if(MUS.want&&!MUS.playing)musPlay();
+  };
+  document.addEventListener('pointerdown',kick,true);
+  document.addEventListener('keydown',kick,true);
+  setTimeout(()=>{document.removeEventListener('pointerdown',kick,true);document.removeEventListener('keydown',kick,true)},25000);
+  if(MUS.mode==='audio')musPlayAudio(true);
+ }
+}
+
 /* ---- Màn hình WELCOME khi mở trang (mượt + tự đổi màu theo Sáng/Tối) ---- */
 const bootEl=$('#boot'),bootPctEl=$('#bootPct'),bootRingEl=$('#bootRing'),bootT0=performance.now();
 let bootDone=false,bootResume=0,bootFin=false;
@@ -732,6 +1070,7 @@ requestAnimationFrame(function bootTick(now){
  try{const r=await Promise.race([fetch('config.json',{cache:'no-cache'}),new Promise((_,j)=>setTimeout(j,2500))]);if(r&&r.ok){const j=await r.json();delete j.pw;Object.assign(C,j)}}catch(e){}
  try{const l=JSON.parse(localStorage.getItem('dh_cfg')||'{}');delete l.pw;Object.assign(C,l)}catch(e){}
  route();
+ try{musInit()}catch(e){}
  bootDone=true;
 })();
 </script>

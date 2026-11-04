@@ -5,8 +5,10 @@
 1) CÁC FILE TRONG BỘ NÀY
  - index.html            : Trang chủ (xác minh + hồ sơ + bài viết). KHÔNG còn chứa trang admin ẩn.
  - admin.html            : Trang quản trị riêng — đăng nhập bằng mật khẩu.
- - config.json           : Dữ liệu trang (tên, giới thiệu, avatar, link xác minh, mạng xã hội, bài viết).
+ - config.json           : Dữ liệu trang (tên, giới thiệu, avatar, link xác minh, mạng xã hội, bài viết, lượt tải, bình luận).
  - avatar.png            : Ảnh đại diện mặc định.
+ - nhac-nen-1.mp3        : Nhạc nền 1 — Cười Đi (Remix), MP3 không quảng cáo.
+ - nhac-nen-2.mp3        : Nhạc nền 2 — Không Buông (Lofi), MP3 không quảng cáo.
  - HUONG_DAN-SU-DUNG.txt : File này.
 
 2) CÁCH DÙNG TRANG ADMIN (admin.html)
@@ -21,16 +23,39 @@
      · Trên ĐIỆN THOẠI: chạm 3 LẦN LIÊN TIẾP vào GÓC DƯỚI BÊN PHẢI màn hình
        (trong vòng 1,6 giây), hoặc chạm đúp vào số "404".
    Bấm phím Esc để ẩn lại.
- - Mật khẩu admin: hãy tự đặt trong mục "Bảo mật" của trang admin — đừng để lộ mật khẩu khi chia sẻ file này.
+ - Mật khẩu admin: hãy tự đặt trong mục "Bảo mật & dữ liệu" của trang admin — đừng để lộ mật khẩu khi chia sẻ file này.
+ - Giao diện admin có 6 mục ở thanh bên (trên điện thoại là dãy tab cuộn ngang):
+   Tổng quan · Hồ sơ hiển thị · Kênh & liên kết · Nhạc nền · Bài viết ·
+   Bảo mật & dữ liệu. Thanh thao tác ở cuối trang luôn hiện để Lưu / Tải / Nhập
+   config nhanh; trên điện thoại nút "Lưu thay đổi" nằm trên cùng của thanh này.
  - Trong admin có thể:
     + Chọn avatar từ máy (ảnh tự thu nhỏ, nhúng thẳng vào config.json — không cần up file riêng).
     + Sửa nhãn badge, tên hiển thị, phần giới thiệu.
-    + Sửa link đăng ký kênh / link video like (video YouTube sẽ phát ngay
-      trong bước xác minh; khách mở YouTube ít nhất 4 giây, nút xác nhận tự
-      mở sau tối đa 6 giây).
+    + Sửa hộp XÁC MINH NHIỀU BƯỚC trong mục “Kênh & liên kết”: tiêu đề,
+      dòng mô tả, chữ trên nút mở khóa; thêm / xoá / đổi thứ tự từng bước;
+      chọn biểu tượng, màu và bật-tắt từng bước. Mỗi bước khách phải mở link,
+      ở lại ít nhất 4 giây; đủ tất cả bước đang bật thì nút “Mở khóa” mới bấm được.
+      Bước nào để trống link hoặc tắt thì không tính vào tiến độ.
+      Mặc định có 3 bước: Đăng ký kênh → Like video → Bình luận video (YouTube).
+    + Bật/tắt ĐẾM LƯỢT TẢI: hiện bảng “Top lượt tải” và số lượt tải trên
+      từng bài. Mỗi bài có “Mã thống kê” riêng trong tab Bài viết; đổi mã
+      là bắt đầu đếm lại từ 0. Số bài trong bảng Top chỉnh từ 1 đến 12.
+      TỔNG LƯỢT TẢI hiển thị số thật; số lẻ từng bài được chia tự động để
+      cộng lại đúng bằng tổng. Bảng Top có kèm ảnh bìa/ảnh nhỏ của từng bài.
+      Khi khách bấm “Tải ngay”, cả tổng và số từng bài tự cập nhật.
+    + BƯỚC 3 “BÌNH LUẬN VIDEO” trong hộp xác minh: khách mở video YouTube,
+      bình luận rồi quay lại; ở đủ 4 giây thì bước tự tích. Có thể sửa / tắt /
+      đổi thứ tự như các bước khác trong mục “Kênh & liên kết”.
+    + Bật/tắt BÌNH LUẬN VIDEO trên từng bài (YouTube): khách bấm nút bình luận
+      trên thẻ bài viết hoặc trong popup tải xuống để xem video và mở phần
+      bình luận trên YouTube (YouTube không cho nhúng khung bình luận ra
+      trang ngoài). Tất cả bài dùng chung một video YouTube.
+      Sửa được tiêu đề, lời nhắc và link video YouTube.
     + Thêm - xoá mạng xã hội (Telegram, Zalo, YouTube, TikTok, Website).
     + Bật/tắt NHẠC NỀN, tự phát khi vào web, chỉnh âm lượng và thêm bài
-      bằng LINK MP3 hoặc LINK YOUTUBE (không cần up file nhạc).
+      bằng FILE MP3 up cùng thư mục với index.html (VD: ./nhac-nen-1.mp3),
+      LINK MP3 trực tiếp hoặc LINK YOUTUBE. Nên dùng MP3 để nhạc nền
+      KHÔNG CÓ QUẢNG CÁO; link YouTube có thể bị chèn quảng cáo.
     + Thêm - sửa - xoá bài viết: kèm ẢNH BÌA, ẢNH NHỎ (biểu tượng), HỆ ĐIỀU HÀNH
       (hdh: Android/iOS/PC...), PHIÊN BẢN, DUNG LƯỢNG, nút GET KEY và dải
       TÍNH NĂNG tuỳ chọn — hiện thành thẻ giống hình.
@@ -43,8 +68,13 @@
     + Viết THÔNG BÁO hiển thị trên trang chủ (để trống = tắt; khách bấm ✕ để ẩn).
      + Viết nội dung HƯỚNG DẪN — khách bấm nút “?” ở góc trái dưới trang chủ (để trống = ẩn nút).
      + Đổi mật khẩu admin.
-     + Xem “📊 Thống kê thật” — tự đếm số lượt truy cập, lượt bấm Đăng ký / Like
-       và lượt tải của từng bài từ TẤT CẢ khách truy cập (cần mạng, bấm 🔄 để cập nhật).
+     + Xem mục “Tổng quan” — 7 thẻ số liệu tự đếm lượt truy cập, lượt bấm
+       Đăng ký / Like / Bình luận video, tổng lượt tải; bảng xếp hạng lượt tải
+       theo bài (kèm ảnh nhỏ) và BIỂU ĐỒ LƯỢT TRUY CẬP theo ngày (chọn 7 / 14 / 30 ngày,
+       rê chuột lên từng điểm để xem chi tiết). Số liệu lấy từ TẤT CẢ khách
+       truy cập, cần mạng; bấm “Cập nhật” để làm mới. Ngày đã qua được lưu
+       tạm trên máy nên mở lại trang sẽ nhanh hơn và không bị thiếu điểm
+       biểu đồ.
  - "Lưu thay đổi"  = chỉ xem thử trên máy bạn (lưu tạm trong trình duyệt).
  - "Tải config.json" = tải file mới rồi THAY THẾ file config.json trên GitHub.
  - "Nhập config.json" = nạp file config đang có trên máy vào admin để sửa tiếp.
@@ -53,28 +83,45 @@
  - Màn hình "WELCOME — Đang khởi động..." khi mở web là hiệu ứng khởi động
    (khoảng 2 giây) rồi tự vào trang — màu màn hình tự đổi theo chế độ Sáng/Tối
    của máy bạn (không phải lỗi).
- - Khi vào trang, các số liệu (500 M+, 2026) sẽ tự đếm chạy lên — đây là hiệu
-   ứng sinh động, không phải lỗi.
- - Web có 2 chế độ SÁNG / TỐI: lần đầu tự theo cài đặt hệ thống của máy; bấm nút
-   tròn 🌙/☀️ ở GÓC TRÊN BÊN PHẢI để đổi — web sẽ nhớ lựa chọn của bạn.
-   (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
-  - XÁC MINH NGHIÊM NGẶT THEO PHIÊN: đang xem mà tải lại trang (F5) thì không
-    phải làm lại, nhưng ĐÓNG TAB / mở lại web từ đầu sẽ phải Đăng ký + Like lại.
-    Khi bấm link Đăng ký hoặc Like, khách mở YouTube ít nhất 4 giây rồi quay
-    lại. Nút xác nhận tự mở sau tối đa 6 giây (kể cả khi trình duyệt không nhận
-    diện được việc chuyển tab), nên khách không bị đứng.
+ - Khi vào trang, ô “Lượt tải” tự đếm theo TỔNG LƯỢT TẢI thật; ô “Cập nhật”
+   hiện năm của bài viết mới nhất. Số liệu cần mạng, lỗi mạng thì hiện “—”.
+ - Web có 2 chế độ SÁNG / TỐI theo phong cách Liquid Glass: lần đầu tự theo
+   cài đặt hệ thống của máy; bấm nút tròn 🌙/☀️ ở GÓC TRÊN BÊN PHẢI để đổi — web
+   sẽ nhớ lựa chọn của bạn. (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
+  - XÁC MINH NHIỀU BƯỚC THEO PHIÊN: hộp “Mở link” hiện từng bước có màu riêng,
+    thanh tiến độ và bộ đếm. Khách bấm từng link, ở lại ít nhất 4 giây
+    (bộ đếm giảm dần); đủ tất cả bước đang bật thì bước đó tự tích
+    và nút “Mở khóa” mới bấm được. Mặc định 3 bước: Đăng ký kênh → Like video →
+    Bình luận video (YouTube). Tải lại trang (F5) không phải làm lại, nhưng
+    ĐÓNG TAB / mở lại web từ đầu sẽ phải xác minh lại. Admin có thể bật/tắt,
+    đổi thứ tự và sửa từng bước trong mục “Kênh & liên kết”.
   - Trang chủ có thêm: Ô TÌM KIẾM bài viết + bộ lọc hệ điều hành (Android/iOS/PC),
     nút CHIA SẺ trên mỗi thẻ (copy link web gửi cho bạn bè) và nút ⬆️ LÊN ĐẦU TRANG.
   - Nút 🎵 ở góc trái dưới: mở TRÌNH PHÁT NHẠC (phát/tạm dừng, bài trước/sau,
     tua bài, chỉnh âm lượng, chọn bài trong danh sách). Nhạc tự phát sau cú bấm
     đầu tiên của khách nếu bật “Tự phát”; khách tắt thì web nhớ và không tự bật lại.
+    Khi mở tab YouTube để xác minh rồi quay lại, nhạc MP3 vẫn phát tiếp bình thường.
+    Web đã kèm sẵn 2 bài MP3 không quảng cáo do bạn cung cấp:
+    nhac-nen-1.mp3 (Cười Đi Remix) và nhac-nen-2.mp3 (Không Buông Lofi) —
+    khi up GitHub nhớ up 2 file này cùng chỗ với index.html. Nếu dùng link YouTube
+    thay thế, trình duyệt có thể tạm dừng âm thanh khi tab web bị ẩn và có thể có
+    quảng cáo; dùng MP3 trực tiếp để chắc chắn sạch quảng cáo.
+    (Nguồn: 2 file nhạc do bạn cung cấp — chỉ dùng khi bạn có quyền công khai.)
   - Bấm vào thân thẻ bài viết cũng mở bảng tải; gõ phím “/” để nhảy vào ô tìm kiếm.
   - ĐÃ BẬT CHỐNG COPY MÃ NGUỒN: chặn chuột phải, copy, Ctrl+U / Ctrl+S / F12…
     (bấm chuột trái bình thường KHÔNG bị cảnh báo — chỉ hiện thông báo khi có
     người thật sự thử copy / mở source. Người rành máy tính vẫn có cách xem,
     nhưng sẽ khó hơn rất nhiều) — kèm thông báo nhắc khéo hiện lên 😏.
-  - Bấm vào khung SỐ LIỆU (500 M+ / 2026 / #1) để các số tự đếm chạy lại; ảnh đại
+  - Bấm vào khung SỐ LIỆU (Lượt tải / Cập nhật / #1) để làm mới và đếm lại; ảnh đại
     diện có khung holographic xoay + sao bay quanh, nhún nhảy và nảy khi bấm.
+  - Bảng “Top lượt tải” trên trang chủ xếp theo số lượt tải hiển thị, có ảnh
+    bìa/ảnh nhỏ từng bài; bấm vào một dòng để mở đúng bài viết đó. Tổng lượt
+    tải là số thật, số từng bài được chia tự động để cộng lại đúng bằng tổng.
+  - BÌNH LUẬN VIDEO (YouTube) trong admin mục “Kênh & liên kết”:
+    khách xem video và bấm nút mở phần bình luận trên YouTube — không thể
+    nhúng khung bình luận YouTube ra trang ngoài, nên khách bấm nút để sang
+    YouTube bình luận; nhớ Đăng ký kênh + Like video. Tất cả bài dùng chung
+    một video YouTube, sửa link trong ô “Link video YouTube”.
  - Mật khẩu admin chỉ lưu trên máy (localStorage), KHÔNG nằm trong config.json.
   - Mục “📊 Thống kê thật” trong admin cần mạng để xem số liệu; nếu dịch vụ đếm tạm
     lỗi thì web vẫn chạy bình thường và số liệu sẽ tự đếm tiếp sau đó.

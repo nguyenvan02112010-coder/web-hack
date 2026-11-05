@@ -1,6 +1,6 @@
 {
   "subUrl": "https://youtube.com/@nguyenmodv2?si=fSdbwKkRQ9kOQKam",
-  "likeUrl": "https://youtu.be/Jg7tmQl7m0A?si=niHCcbf7gYWiF6LR",
+  "likeUrl": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
   "verify": {
     "title": "Mở link",
     "subtitle": "Hoàn thành các bước để tiếp tục",
@@ -16,14 +16,14 @@
       {
         "icon": "like",
         "label": "Like video",
-        "url": "https://youtu.be/Jg7tmQl7m0A?si=niHCcbf7gYWiF6LR",
+        "url": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
         "tone": "blue",
         "on": true
       },
       {
         "icon": "chat",
         "label": "Bình luận video",
-        "url": "https://youtu.be/Jg7tmQl7m0A?si=niHCcbf7gYWiF6LR",
+        "url": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
         "tone": "green",
         "on": true
       },
@@ -88,6 +88,22 @@
     "v": 2
   },
   "posts": [
+    {
+      "createdAt": 1793849130739,
+      "id": "#6",
+      "statKey": "6",
+      "title": "PROXY DXP V2 NO KEY",
+      "cover": "https://i.ytimg.com/vi/VYMb-Zo3MPc/hqdefault.jpg",
+      "icon": "",
+      "os": "",
+      "ver": "V2",
+      "size": "",
+      "keyUrl": "",
+      "feat": "ESP,AIM HEAD",
+      "isNew": true,
+      "body": "link tải:https://gtraffic.io/S9lwfQ6\n\nkey:DecapitavelMDZ",
+      "url": "https://gtraffic.io/S9lwfQ6"
+    },
     {
       "createdAt": 1793784640769,
       "id": "#5",

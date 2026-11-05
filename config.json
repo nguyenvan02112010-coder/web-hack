@@ -1,6 +1,6 @@
 {
   "subUrl": "https://youtube.com/@nguyenmodv2?si=fSdbwKkRQ9kOQKam",
-  "likeUrl": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
+  "likeUrl": "https://youtu.be/St6m-pAAgfQ?si=KuJUSJMVgznt3lAN",
   "verify": {
     "title": "Mở link",
     "subtitle": "Hoàn thành các bước để tiếp tục",
@@ -16,14 +16,14 @@
       {
         "icon": "like",
         "label": "Like video",
-        "url": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
+        "url": "https://youtu.be/St6m-pAAgfQ?si=KuJUSJMVgznt3lAN",
         "tone": "blue",
         "on": true
       },
       {
         "icon": "chat",
         "label": "Bình luận video",
-        "url": "https://youtu.be/VYMb-Zo3MPc?si=c7XNdgwi5rwBvnlu",
+        "url": "https://youtu.be/St6m-pAAgfQ?si=KuJUSJMVgznt3lAN",
         "tone": "green",
         "on": true
       },
@@ -88,6 +88,22 @@
     "v": 2
   },
   "posts": [
+    {
+      "createdAt": 1793859351633,
+      "id": "#7",
+      "statKey": "7",
+      "title": "MENU SRS TEAM NO KEY",
+      "cover": "https://i.ytimg.com/vi/St6m-pAAgfQ/hqdefault.jpg",
+      "icon": "",
+      "os": "Android",
+      "ver": "",
+      "size": "",
+      "keyUrl": "",
+      "feat": "ESP,AIM,AIMKILL",
+      "isNew": true,
+      "body": "link tải:https://gtraffic.io/6M6n9gQ",
+      "url": "https://gtraffic.io/6M6n9gQ"
+    },
     {
       "createdAt": 1793849130739,
       "id": "#6",

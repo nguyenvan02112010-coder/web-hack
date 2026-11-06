@@ -1,6 +1,6 @@
 {
   "subUrl": "https://youtube.com/@nguyenmodv2?si=fSdbwKkRQ9kOQKam",
-  "likeUrl": "https://youtu.be/vJrARiP-Csw?si=99ZwwCpyZ18t0yCa",
+  "likeUrl": "https://youtu.be/vJrARiP-Csw?si=Epxmn9JrSkRelKYw",
   "verify": {
     "title": "Mở link",
     "subtitle": "Hoàn thành các bước để tiếp tục",
@@ -16,14 +16,14 @@
       {
         "icon": "like",
         "label": "Like video",
-        "url": "https://youtu.be/vJrARiP-Csw?si=99ZwwCpyZ18t0yCa",
+        "url": "https://youtu.be/vJrARiP-Csw?si=Epxmn9JrSkRelKYw",
         "tone": "blue",
         "on": true
       },
       {
         "icon": "chat",
         "label": "Bình luận video",
-        "url": "https://youtu.be/vJrARiP-Csw?si=99ZwwCpyZ18t0yCa",
+        "url": "https://youtu.be/vJrARiP-Csw?si=Epxmn9JrSkRelKYw",
         "tone": "green",
         "on": true
       },

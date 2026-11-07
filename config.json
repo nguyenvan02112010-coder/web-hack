@@ -1,6 +1,6 @@
 {
   "subUrl": "https://youtube.com/@nguyenmodv2?si=fSdbwKkRQ9kOQKam",
-  "likeUrl": "https://youtu.be/afFhSrhIY94?si=z9sBMrIUWug8liUK",
+  "likeUrl": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
   "verify": {
     "title": "Mở link",
     "subtitle": "Hoàn thành các bước để tiếp tục",
@@ -16,14 +16,14 @@
       {
         "icon": "like",
         "label": "Like video",
-        "url": "https://youtu.be/afFhSrhIY94?si=z9sBMrIUWug8liUK",
+        "url": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
         "tone": "blue",
         "on": true
       },
       {
         "icon": "chat",
         "label": "Bình luận video",
-        "url": "https://youtu.be/afFhSrhIY94?si=z9sBMrIUWug8liUK",
+        "url": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
         "tone": "green",
         "on": true
       },
@@ -88,6 +88,22 @@
     "v": 2
   },
   "posts": [
+    {
+      "createdAt": 1794030635370,
+      "id": "#11",
+      "statKey": "11",
+      "title": "MENU MULTI APP NO ROOT NO KEY",
+      "cover": "https://i.ytimg.com/vi/B8wtl0OFM3g/hqdefault.jpg",
+      "icon": "",
+      "os": "Android",
+      "ver": "",
+      "size": "",
+      "keyUrl": "",
+      "feat": "ESP,AIM HEAD",
+      "isNew": true,
+      "body": "Link tải: https://gtraffic.io/q66QaqT\nNo key - không cần key\nUse : Free Fire th Play\nAntiban ` Work như gốc",
+      "url": "https://gtraffic.io/q66QaqT"
+    },
     {
       "createdAt": 1793968778675,
       "id": "#10",

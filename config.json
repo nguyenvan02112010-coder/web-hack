@@ -1,6 +1,6 @@
 {
   "subUrl": "https://youtube.com/@nguyenmodv2?si=fSdbwKkRQ9kOQKam",
-  "likeUrl": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
+  "likeUrl": "https://youtu.be/nBwRlOfS-MU?si=H8Gcquxma3yuutsP",
   "verify": {
     "title": "Mở link",
     "subtitle": "Hoàn thành các bước để tiếp tục",
@@ -16,14 +16,14 @@
       {
         "icon": "like",
         "label": "Like video",
-        "url": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
+        "url": "https://youtu.be/nBwRlOfS-MU?si=H8Gcquxma3yuutsP",
         "tone": "blue",
         "on": true
       },
       {
         "icon": "chat",
         "label": "Bình luận video",
-        "url": "https://youtu.be/B8wtl0OFM3g?si=3553iEn7tAbHejhC",
+        "url": "https://youtu.be/nBwRlOfS-MU?si=H8Gcquxma3yuutsP",
         "tone": "green",
         "on": true
       },
@@ -74,20 +74,36 @@
   "music": {
     "enabled": true,
     "autoplay": true,
-    "volume": 0.45,
-    "v": 2,
+    "volume": 0.55,
     "tracks": [
       {
-        "name": "Cười Đi (Remix)",
-        "url": "./nhac-nen-1.mp3"
+        "name": "Nhạc nền 1",
+        "url": "https://youtu.be/tjoN_x9pyiY?si=CQJzLmLLV2NYNshv"
       },
       {
-        "name": "Không Buông (Lofi)",
-        "url": "./nhac-nen-2.mp3"
+        "name": "Nhạc nền 2",
+        "url": "https://youtu.be/B8MA0Dj4u5w?si=1Oaf6SGco0YCVdwi"
       }
-    ]
+    ],
+    "v": 2
   },
   "posts": [
+    {
+      "createdAt": 1794140653783,
+      "id": "#",
+      "statKey": "post",
+      "title": "MENU FF VN NO KEY",
+      "cover": "https://i.ytimg.com/vi/nBwRlOfS-MU/hqdefault.jpg",
+      "icon": "",
+      "os": "Android",
+      "ver": "",
+      "size": "",
+      "keyUrl": "",
+      "feat": "ESP,AIM",
+      "isNew": true,
+      "body": "Link tải: https://gtraffic.io/32xQ7H6\nNo key - không cần key\nUse : Free Fire th Play\nAntiban ` Work như gốc",
+      "url": "https://gtraffic.io/32xQ7H6"
+    },
     {
       "createdAt": 1794030635370,
       "id": "#11",

@@ -455,23 +455,23 @@ html.dark .del{border-color:rgba(255,122,140,.3);background:rgba(225,29,72,.14);
 .vp-card{max-width:430px;margin:0 auto;padding:16px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(155deg,var(--card-solid),var(--soft));box-shadow:0 8px 22px rgba(30,45,90,.08);text-align:center}
 .vp-card>b{display:block;font-size:15px;font-weight:900}
 .vp-card>span{display:block;margin:3px 0 12px;color:var(--mut);font-size:11.5px;font-weight:600}
-.vp-list{display:flex;flex-direction:column;gap:6px}
-.vp-row{display:grid;grid-template-columns:20px minmax(0,1fr) 20px;align-items:center;gap:8px;min-height:36px;padding:0 10px;border-radius:8px;color:#fff;font-size:11px;font-weight:800;text-align:center}
-.vp-row .i{width:16px;height:16px;margin:auto}
-.vp-row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.vp-row i{display:grid;place-items:center;font-style:normal;opacity:.85}
-.vp-row.t-red{background:linear-gradient(135deg,#ff3b3b,#d90429)}
-.vp-row.t-blue{background:linear-gradient(135deg,#2ec5ff,#039be5)}
-.vp-row.t-black{background:linear-gradient(135deg,#262a31,#050609)}
-.vp-row.t-violet{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
-.vp-row.t-green{background:linear-gradient(135deg,#10c98a,#059669)}
-.vp-row.t-slate{background:linear-gradient(135deg,#64748b,#334155)}
-.vp-empty{padding:14px;border:1px dashed var(--line);border-radius:8px;color:var(--mut);font-size:11px}
-.vp-card small{display:block;margin:12px 0 6px;color:var(--mut);font-size:10.5px;font-weight:700}
-.vp-bar{height:4px;border-radius:99px;background:var(--soft-2);overflow:hidden}
-.vp-bar i{display:block;width:0;height:100%;border-radius:99px;background:var(--grad)}
-.vp-btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;margin-top:10px;border-radius:9px;background:var(--soft-2);color:var(--mut);font-size:11px;font-weight:800}
+.vp-steps{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin:0 0 10px}
+.vp-dot{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--mut);font-size:9.5px;font-weight:800;white-space:nowrap}
+.vp-dot.active{color:#6a5cff;border-color:rgba(106,92,255,.4);background:rgba(106,92,255,.1)}
+.vp-dot .i{width:11px;height:11px;flex:none}
+.vp-gateico{width:44px;height:44px;margin:4px auto 8px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:#6a5cff}
+.vp-gateico .i{width:22px;height:22px}
+.vp-gateico.t-red{background:rgba(255,59,59,.1);border-color:rgba(255,59,59,.28);color:#d90429}
+.vp-gateico.t-blue{background:rgba(13,139,242,.1);border-color:rgba(13,139,242,.28);color:#0d8bf2}
+.vp-gateico.t-black{background:rgba(5,6,9,.1);border-color:rgba(5,6,9,.24);color:#262a31}
+.vp-gateico.t-violet{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.28);color:#8b5cf6}
+.vp-gateico.t-green{background:rgba(16,201,138,.1);border-color:rgba(16,201,138,.28);color:#0a9b74}
+.vp-gateico.t-slate{background:rgba(100,116,139,.1);border-color:rgba(100,116,139,.28);color:#475569}
+.vp-current{display:block;font-size:11.5px;font-weight:900}
+.vp-desc{color:var(--mut);font-size:10.5px;font-weight:600;line-height:1.45;margin:3px 0 9px}
+.vp-btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border-radius:9px;background:linear-gradient(135deg,#6a5cff,#0d8bf2 55%,#09c6dc);color:#fff;font-size:11px;font-weight:800;box-shadow:0 8px 18px rgba(13,139,242,.22)}
 .vp-btn .i{width:14px;height:14px}
+.vp-empty{padding:14px;border:1px dashed var(--line);border-radius:8px;color:var(--mut);font-size:11px}
 .pe{border:1px solid var(--line);border-radius:17px;background:var(--card-solid);overflow:hidden;box-shadow:0 3px 12px rgba(30,45,90,.035)}
 .pe[open]{border-color:rgba(13,139,242,.22);box-shadow:0 7px 20px rgba(30,45,90,.06)}
 .pe summary{display:flex;align-items:center;gap:9px;padding:12px 13px;cursor:pointer;list-style:none;font-size:13px;font-weight:800;transition:.2s}
@@ -1016,12 +1016,16 @@ function vfPreview(){
  document.querySelectorAll('#vRows .vrow').forEach((r,i)=>{const n=r.querySelector('.vnum');if(n)n.textContent=i+1});
  const rows=vfReadRows(),live=rows.filter(t=>t.on&&safe(t.url));
  const st=$('#vStatus');
- if(st)st.textContent=rows.length?('Đang bật '+live.length+'/'+rows.length+' bước · khách ở lại 4 giây mỗi bước'):'Chưa có bước nào — khách vào thẳng web';
+ if(st)st.textContent=rows.length?('Đang bật '+live.length+'/'+rows.length+' bước · mỗi bước: mở link, bấm xác nhận (nhớ 15 phút)'):'Chưa có bước nào — khách vào thẳng web';
  const p=$('#vPrev');if(!p)return;
  const title=(($('#a_vtitle')||{}).value||'').trim()||'Mở link';
  const sub=(($('#a_vsub')||{}).value||'').trim()||'Hoàn thành các bước để tiếp tục';
  const btn=(($('#a_vbtn')||{}).value||'').trim()||'Mở khóa';
- p.innerHTML=`<div class="vp-card"><b>${esc(title)}</b><span>${esc(sub)}</span><div class="vp-list">${live.length?live.map(t=>`<div class="vp-row t-${esc(t.tone)}"><span>${ico(t.icon)}</span><b>${esc(t.label)}</b><i>${ico('ext')}</i></div>`).join(''):'<div class="vp-empty">Chưa bật bước nào</div>'}</div><small>Tiến độ mở khóa 0/${live.length}</small><div class="vp-bar"><i></i></div><div class="vp-btn">${ico('lock')} ${esc(btn)}</div></div>`;
+ const short={yt:'Đăng ký',like:'Like',chat:'Comment'};
+ const dots=live.map((t,i)=>`<span class="vp-dot${i===0?' active':''}">${ico(t.icon)}<span>${esc(short[t.icon]||t.label)}</span></span>`).join('');
+ const first=live[0];
+ const stepName=first?(first.icon==='yt'?'Đăng ký kênh':first.icon==='like'?'Like video':first.icon==='chat'?'Bình luận video':first.label):'';
+ p.innerHTML=`<div class="vp-card"><b>${esc(title)}</b><span>${esc(sub)}</span><div class="vp-steps">${dots}</div><div class="vp-gateico t-${esc(first?first.tone:'slate')}">${ico(first?first.icon:'link')}</div><b class="vp-current">Bước 1/${live.length}: ${esc(stepName)}</b><p class="vp-desc">Bấm mở link, hoàn thành xong thì quay lại bấm nút xác nhận. Mỗi bước được ghi nhớ 15 phút.</p><div class="vp-btn">${ico('ok')} ${esc(btn)}</div></div>`;
 }
 function postEls(){return [...document.querySelectorAll('#pl .pe')]}
 function postField(pe,name){const el=pe.querySelector('[name="'+name+'"]');return el?el.value:''}
@@ -1233,11 +1237,11 @@ function renderForm(){
   </div>
   <div class="form-grid">
    <section class="card wide">
-    <div class="card-head"><div><span class="eyebrow">Xác minh</span><h4>Hộp mở khóa nhiều bước</h4><p class="nt">Mỗi dòng là một bước khách phải mở link và ở lại ít nhất 4 giây. Đủ tất cả bước đang bật thì nút “Mở khóa” mới bấm được. Tắt một bước để ẩn khỏi trang chủ.</p></div><span class="info-ico"><svg class="i" viewBox="0 0 24 24"><use href="#i-ok"/></svg></span></div>
+    <div class="card-head"><div><span class="eyebrow">Xác minh</span><h4>Hộp mở khóa nhiều bước</h4><p class="nt">Mỗi dòng là một bước, hiện lần lượt: khách bấm mở link, hoàn thành xong thì quay lại bấm nút xác nhận để sang bước kế tiếp. Nếu bấm xác nhận quá sớm, web nhắc quay lại làm bước đó. Mỗi bước được ghi nhớ 15 phút. Tắt một bước để ẩn khỏi trang chủ.</p></div><span class="info-ico"><svg class="i" viewBox="0 0 24 24"><use href="#i-ok"/></svg></span></div>
     <div class="vgrid3">
      ${fld('Tiêu đề hộp','a_vtitle',V.title,'Mở link')}
      ${fld('Dòng mô tả','a_vsub',V.subtitle,'Hoàn thành các bước để tiếp tục')}
-     ${fld('Chữ trên nút mở khóa','a_vbtn',V.button,'Mở khóa')}
+     ${fld('Chữ nút xác nhận bước cuối','a_vbtn',V.button,'Mở khóa')}
     </div>
     <div id="vRows" class="vrows">${V.tasks.map((t,i)=>vRow(t,i)).join('')}</div>
     <div class="row" style="align-items:center;gap:10px;flex-wrap:wrap">
@@ -1969,7 +1973,7 @@ $('#clr').onclick=()=>{
  try{sessionStorage.removeItem('dh_stats_vals_v1')}catch(e){}
  location.reload();
 };
-$('#rst').onclick=()=>{try{sessionStorage.removeItem('dh_st');localStorage.removeItem('dh_st')}catch(e){}toast('Đã làm lại xác minh cho máy này')};
+$('#rst').onclick=()=>{try{sessionStorage.removeItem('dh_st');localStorage.removeItem('dh_st');Object.keys(localStorage).filter(k=>k.indexOf('dh_gate_v1_')===0).forEach(k=>localStorage.removeItem(k));Object.keys(sessionStorage).filter(k=>k.indexOf('dh_vf_')===0).forEach(k=>sessionStorage.removeItem(k))}catch(e){}toast('Đã làm lại xác minh cho máy này')};
 $('#logout').onclick=()=>{dirty=false;try{sessionStorage.removeItem('dh_admin_ok')}catch(e){}location.reload()};
 
 /* ---- Theo dõi thay đổi chưa lưu ---- */

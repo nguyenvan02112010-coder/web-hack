@@ -32,9 +32,10 @@
     + Chọn avatar từ máy (ảnh tự thu nhỏ, nhúng thẳng vào config.json — không cần up file riêng).
     + Sửa nhãn badge, tên hiển thị, phần giới thiệu.
     + Sửa hộp XÁC MINH NHIỀU BƯỚC trong mục “Kênh & liên kết”: tiêu đề,
-      dòng mô tả, chữ trên nút mở khóa; thêm / xoá / đổi thứ tự từng bước;
-      chọn biểu tượng, màu và bật-tắt từng bước. Mỗi bước khách phải mở link,
-      ở lại ít nhất 4 giây; đủ tất cả bước đang bật thì nút “Mở khóa” mới bấm được.
+      dòng mô tả, chữ nút xác nhận bước cuối; thêm / xoá / đổi thứ tự từng bước;
+      chọn biểu tượng, màu và bật-tắt từng bước. Mỗi bước khách làm lần lượt:
+      bấm mở link, hoàn thành xong quay lại bấm nút xác nhận để sang bước kế tiếp;
+      xong bước cuối web tự mở khóa. Mỗi bước được ghi nhớ 15 phút.
       Bước nào để trống link hoặc tắt thì không tính vào tiến độ.
       Mặc định có 3 bước: Đăng ký kênh → Like video → Bình luận video (YouTube).
     + Bật/tắt ĐẾM LƯỢT TẢI: hiện bảng “Top lượt tải” và số lượt tải trên
@@ -44,7 +45,7 @@
       cộng lại đúng bằng tổng. Bảng Top có kèm ảnh bìa/ảnh nhỏ của từng bài.
       Khi khách bấm “Tải ngay”, cả tổng và số từng bài tự cập nhật.
     + BƯỚC 3 “BÌNH LUẬN VIDEO” trong hộp xác minh: khách mở video YouTube,
-      bình luận rồi quay lại; ở đủ 4 giây thì bước tự tích. Có thể sửa / tắt /
+      bình luận; bấm mở link rồi quay lại bấm nút xác nhận. Có thể sửa / tắt /
       đổi thứ tự như các bước khác trong mục “Kênh & liên kết”.
     + Bật/tắt BÌNH LUẬN VIDEO trên từng bài (YouTube): khách bấm nút bình luận
       trên thẻ bài viết hoặc trong popup tải xuống để xem video và mở phần
@@ -88,13 +89,14 @@
  - Web có 2 chế độ SÁNG / TỐI theo phong cách Liquid Glass: lần đầu tự theo
    cài đặt hệ thống của máy; bấm nút tròn 🌙/☀️ ở GÓC TRÊN BÊN PHẢI để đổi — web
    sẽ nhớ lựa chọn của bạn. (Trang admin cũng có nút đổi ngay trên thanh trên cùng.)
-  - XÁC MINH NHIỀU BƯỚC THEO PHIÊN: hộp “Mở link” hiện từng bước có màu riêng,
-    thanh tiến độ và bộ đếm. Khách bấm từng link, ở lại ít nhất 4 giây
-    (bộ đếm giảm dần); đủ tất cả bước đang bật thì bước đó tự tích
-    và nút “Mở khóa” mới bấm được. Mặc định 3 bước: Đăng ký kênh → Like video →
-    Bình luận video (YouTube). Tải lại trang (F5) không phải làm lại, nhưng
-    ĐÓNG TAB / mở lại web từ đầu sẽ phải xác minh lại. Admin có thể bật/tắt,
-    đổi thứ tự và sửa từng bước trong mục “Kênh & liên kết”.
+  - XÁC MINH TỪNG BƯỚC: hộp “Mở link” hiện các chấm bước và chỉ mở một bước
+    tại một thời điểm. Khách bấm nút mở link của bước đó, hoàn thành xong quay
+    lại bấm nút xác nhận để sang bước kế tiếp. Nếu bấm xác nhận quá sớm, web
+    nhắc quay lại làm bước đó. Xong bước cuối web tự mở khóa. Mỗi bước được ghi nhớ 15 phút (tải lại trang F5
+    không phải làm lại); hết 15 phút hoặc khi admin đổi link của bước đó thì
+    phải xác minh lại.
+    Mặc định 3 bước: Đăng ký kênh → Like video → Bình luận video (YouTube).
+    Admin có thể bật/tắt, đổi thứ tự và sửa từng bước trong mục “Kênh & liên kết”.
   - Trang chủ có thêm: Ô TÌM KIẾM bài viết + bộ lọc hệ điều hành (Android/iOS/PC),
     nút CHIA SẺ trên mỗi thẻ (copy link web gửi cho bạn bè) và nút ⬆️ LÊN ĐẦU TRANG.
   - Nút 🎵 ở góc trái dưới: mở TRÌNH PHÁT NHẠC (phát/tạm dừng, bài trước/sau,

@@ -519,9 +519,50 @@ html.dark .panel,html.dark .sheet{background:var(--lg-card);border-color:var(--l
 .vhead{text-align:center;margin:0 0 18px}
 .vhead h1{font-size:23px;line-height:1.25;letter-spacing:-.3px;margin:0 0 6px;color:var(--lg-text);font-weight:900}
 .vhead p{margin:0;color:var(--lg-mut);font-size:13.5px;font-weight:600;line-height:1.5}
-.vtasks{display:flex;flex-direction:column;gap:9px;max-height:min(47dvh,370px);overflow-y:auto;padding:2px;scrollbar-width:thin}
-.vtasks::-webkit-scrollbar{width:6px}
-.vtasks::-webkit-scrollbar-thumb{background:rgba(120,140,190,.35);border-radius:99px}
+.vsteps{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:0 0 18px}
+.vstep-dot{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--lg-line);background:rgba(255,255,255,.38);color:var(--lg-mut);font-size:11px;font-weight:900;line-height:1.2;white-space:nowrap;transition:color .2s,border-color .2s,background .2s,box-shadow .2s}
+.vstep-dot .i{width:14px;height:14px;flex:none}
+.vstep-dot.active{color:#6a5cff;border-color:rgba(106,92,255,.45);background:rgba(106,92,255,.1);box-shadow:0 0 0 3px rgba(106,92,255,.08)}
+.vstep-dot.done{color:#0a9b74;border-color:rgba(16,201,138,.42);background:rgba(16,201,138,.1)}
+html.dark .vstep-dot{background:rgba(255,255,255,.05);border-color:rgba(160,178,232,.18)}
+html.dark .vstep-dot.active{color:#a9a2ff;border-color:rgba(130,120,255,.48);background:rgba(106,92,255,.16);box-shadow:0 0 0 3px rgba(106,92,255,.1)}
+html.dark .vstep-dot.done{color:#5ee6b8;border-color:rgba(16,201,138,.45);background:rgba(16,201,138,.12)}
+.vgate{display:flex;flex-direction:column;gap:12px}
+.vgate-ico{width:66px;height:66px;margin:0 auto;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(106,92,255,.24);background:radial-gradient(circle at 50% 38%,rgba(106,92,255,.28),rgba(106,92,255,.04));box-shadow:0 0 34px rgba(106,92,255,.18)}
+.vgate-ico .i{width:32px;height:32px;color:#6a5cff}
+.vgate-ico.t-red{background:radial-gradient(circle at 50% 38%,rgba(255,59,59,.26),rgba(255,59,59,.04));border-color:rgba(255,59,59,.3);box-shadow:0 0 34px rgba(255,59,59,.15)}
+.vgate-ico.t-red .i{color:#e11d48}
+.vgate-ico.t-blue{background:radial-gradient(circle at 50% 38%,rgba(13,139,242,.26),rgba(13,139,242,.04));border-color:rgba(13,139,242,.3);box-shadow:0 0 34px rgba(13,139,242,.15)}
+.vgate-ico.t-blue .i{color:#0d8bf2}
+.vgate-ico.t-green{background:radial-gradient(circle at 50% 38%,rgba(16,201,138,.26),rgba(16,201,138,.04));border-color:rgba(16,201,138,.3);box-shadow:0 0 34px rgba(16,201,138,.15)}
+.vgate-ico.t-green .i{color:#0a9b74}
+.vgate h2{text-align:center;font-size:19.5px;line-height:1.25;letter-spacing:-.25px;font-weight:900;color:var(--lg-text);margin:0}
+.vgate-desc{text-align:center;font-size:13px;line-height:1.6;color:var(--lg-mut);font-weight:600;margin:0}
+.vgate-desc b{color:var(--lg-text)}
+.vgate-actions{display:flex;flex-direction:column;gap:9px;margin-top:2px}
+.vgate-note{text-align:center;font-size:12px;line-height:1.55;color:var(--lg-mut);font-weight:600;margin:0}
+.vgate-note b{color:var(--lg-text)}
+.vgate-note.ok{color:#0a9b74;font-weight:800}
+html.dark .vgate-note.ok{color:#5ee6b8}
+.vgate-note.warn{color:#d97706;font-weight:800}
+html.dark .vgate-note.warn{color:#fbbf24}
+.vgate-note.shake{animation:vshake .4s ease-in-out}
+@keyframes vshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.vunlock{min-height:50px;border-radius:12px;font-size:14.5px;border:1px solid #dbe2ef;background:#e8ecf5;color:#8b96ad;box-shadow:none;cursor:not-allowed}
+.vunlock:disabled{filter:none;cursor:not-allowed;opacity:1}
+.vunlock:not(:disabled){border-color:transparent;background:linear-gradient(135deg,#6a5cff,#0d8bf2 55%,#09c6dc);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(13,139,242,.3);cursor:pointer}
+.vunlock:not(:disabled):hover{filter:brightness(1.06)}
+html.dark .vunlock{background:#1b202b;border-color:rgba(255,255,255,.09);color:#6f7789;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+html.dark .vunlock:not(:disabled){background:linear-gradient(135deg,#6a5cff,#0d8bf2 55%,#09c6dc);border-color:transparent;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(13,139,242,.32)}
+.vgate-video{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--lg-line);border-radius:14px;background:rgba(255,255,255,.38);text-align:left}
+.vgate-thumb{position:relative;width:104px;aspect-ratio:16/9;flex:none;border-radius:10px;overflow:hidden;background:#000;border:1px solid var(--lg-line)}
+.vgate-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.vgate-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.3);color:#ff3b3b}
+.vgate-play .i{width:26px;height:26px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+.vgate-vinfo{min-width:0;display:flex;flex-direction:column;gap:2px}
+.vgate-vinfo b{font-size:12.5px;line-height:1.4;color:var(--lg-text);font-weight:800}
+.vgate-vinfo small{font-size:11px;color:var(--lg-mut);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.dark .vgate-video{background:rgba(255,255,255,.05);border-color:var(--lg-line)}
 .vtask{display:grid;grid-template-columns:26px minmax(0,1fr) 26px;align-items:center;gap:10px;min-height:48px;padding:0 14px;border-radius:10px;color:#fff;text-decoration:none;font-weight:800;font-size:14.5px;line-height:1.3;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 6px 16px rgba(11,18,40,.16);transition:transform .15s,filter .2s,box-shadow .2s,opacity .2s;cursor:pointer}
 .vtask::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 52%);pointer-events:none}
 .vtask:hover{filter:brightness(1.07);transform:translateY(-1px)}
@@ -538,31 +579,22 @@ html.dark .panel,html.dark .sheet{background:var(--lg-card);border-color:var(--l
 .vtask.t-green{background:linear-gradient(135deg,#10c98a,#059669)}
 .vtask.t-slate{background:linear-gradient(135deg,#64748b,#334155)}
 .vtask.is-done{filter:saturate(.78);opacity:.9}
-.vtask.is-wait{animation:vpulse 1.4s ease-in-out infinite}
-@keyframes vpulse{50%{filter:brightness(1.14)}}
-.vt-count{display:inline-grid;place-items:center;min-width:34px;padding:2px 6px;border-radius:7px;background:rgba(0,0,0,.25);font-size:11.5px;font-weight:900;font-variant-numeric:tabular-nums}
-.vprogress{margin:18px 0 0;text-align:center;font-size:13.5px;color:var(--lg-mut);font-weight:700}
-.vprogress b{color:var(--lg-text);font-weight:900;font-variant-numeric:tabular-nums}
-.vbar{height:5px;border-radius:99px;background:rgba(120,140,190,.24);margin:9px 2px 18px;overflow:hidden}
-html.dark .vbar{background:rgba(255,255,255,.11)}
-.vbar i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width .35s cubic-bezier(.2,.7,.3,1)}
-.vunlock{min-height:50px;border-radius:12px;font-size:14.5px;border:1px solid #dbe2ef;background:#e8ecf5;color:#8b96ad;box-shadow:none;cursor:not-allowed}
-.vunlock:disabled{filter:none;cursor:not-allowed;opacity:1}
-.vunlock:not(:disabled){border-color:transparent;background:linear-gradient(135deg,#6a5cff,#0d8bf2 55%,#09c6dc);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(13,139,242,.3);cursor:pointer}
-.vunlock:not(:disabled):hover{filter:brightness(1.06)}
-html.dark .vunlock{background:#1b202b;border-color:rgba(255,255,255,.09);color:#6f7789;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
-html.dark .vunlock:not(:disabled){background:linear-gradient(135deg,#6a5cff,#0d8bf2 55%,#09c6dc);border-color:transparent;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(13,139,242,.32)}
 .vhint{text-align:center;font-size:12px;line-height:1.55;color:var(--lg-mut);margin-top:10px}
 .vhint b{color:var(--lg-text)}
 @media(max-width:430px){
  .vpanel{padding:20px 15px 18px;border-radius:24px}
  .vhead h1{font-size:20px}
  .vhead p{font-size:12.5px}
+ .vstep-dot{font-size:10px;padding:5px 8px}
+ .vstep-dot .i{width:13px;height:13px}
+ .vgate-ico{width:58px;height:58px}
+ .vgate-ico .i{width:28px;height:28px}
+ .vgate h2{font-size:18px}
  .vtask{min-height:46px;font-size:13.5px;padding:0 12px;grid-template-columns:24px minmax(0,1fr) 24px;gap:8px}
  .vt-ico .i{width:20px;height:20px}
- .vtasks{max-height:44dvh}
+ .vgate-thumb{width:88px}
 }
-@media(max-height:620px){.vtasks{max-height:38dvh}.vhead{margin-bottom:12px}}
+@media(max-height:620px){.vhead{margin-bottom:12px}}
 
 /* ===================== TOP LƯỢT TẢI ===================== */
 .topdl{position:relative;left:50%;transform:translateX(-50%);width:min(1120px,calc(100vw - 36px));margin:34px 0 0;padding:18px;border:1px solid var(--lg-border);border-radius:24px;background:var(--lg-card);box-shadow:var(--lg-inset),var(--lg-shadow);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);animation:up .55s both}
@@ -881,11 +913,9 @@ html.dark .w-av{box-shadow:0 0 0 12px rgba(124,141,255,.1),0 24px 60px rgba(0,0,
    <h1 id="vTitle">Mở link</h1>
    <p id="vSub">Hoàn thành các bước để tiếp tục</p>
   </div>
-  <div class="vtasks" id="vTasks"></div>
-  <p class="vprogress">Tiến độ mở khóa <b id="vCount">0/0</b></p>
-  <div class="vbar" id="vBarWrap" role="progressbar" aria-label="Tiến độ mở khóa" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><i id="vBar"></i></div>
-  <button class="btn vunlock" id="vGo" type="button" disabled><svg class="i"><use href="#i-lock"/></svg><span id="vGoText">Mở khóa</span></button>
-  <p class="vhint" id="vHint">Mỗi bước cần mở link và ở lại ít nhất <b>4 giây</b>.</p>
+  <div class="vsteps" id="vSteps" aria-label="Các bước xác minh"></div>
+  <div class="vgate" id="vGate"></div>
+  <p class="vhint" id="vHint">Mỗi bước: bấm mở link, sau đó quay lại bấm nút xác nhận.</p>
  </section>
 </main>
 
@@ -1030,109 +1060,104 @@ function normalizePostStats(posts){
 }
 const postStatKey=p=>String((p&&p.statKey)||'').trim().replace(/[^\w-]/g,'').slice(0,48)||'post';
 const dlKeyOf=p=>'dl-'+postStatKey(p);
-let C=JSON.parse(JSON.stringify(DEF)),S={done:0,tasks:{}},pq='',po='';
-try{Object.assign(S,JSON.parse(sessionStorage.getItem('dh_st')||'{}'))}catch(e){}
-if(!S.tasks||typeof S.tasks!=='object')S.tasks={};
-const saveS=()=>{try{sessionStorage.setItem('dh_st',JSON.stringify(S))}catch(e){}};
-/* ---- Xác minh nhiều bước: mỗi link phải mở và ở lại đủ lâu mới tự cộng tiến độ ---- */
-const VF_MIN_TOTAL=4000;
-let vfRun={},vfTimer=null,vfHiddenAt=0;
+let C=JSON.parse(JSON.stringify(DEF)),pq='',po='';
+/* ---- Xác minh từng bước: mở link rồi bấm nút xác nhận để chuyển bước; nhớ 15 phút ---- */
+const VF_TTL_MS=15*60*1000,VF_WAIT_MS=4000,VF_GATE_KEY='dh_gate_v1_',VF_BYPASS_KEY='dh_bypass_v1';
+const vfMem={};
 const vfUrlOk=u=>!!safe(String(u||'').trim());
 function vfList(){
  const tasks=(C.verify&&Array.isArray(C.verify.tasks))?C.verify.tasks:[];
- return tasks.map((t,i)=>({...t,key:String(i)})).filter(t=>t.on!==false&&vfUrlOk(t.url));
+ return tasks.map((t,i)=>({...t,key:String(i)})).filter(t=>t.on!==false&&vfUrlOk(t.url)).map((t,i)=>({...t,step:i}));
 }
-function vfTask(key){return vfList().find(t=>t.key===key)}
-function vfDone(t){return !!(S.tasks&&S.tasks[t.key])}
-function vfAllDone(){const L=vfList();return L.length>0&&L.every(vfDone)}
-function vfAway(r){return r.away+(r.awayStart?Date.now()-r.awayStart:0)}
-function vfEndHtml(t){
- if(vfDone(t))return ico('ok');
- const r=vfRun[t.key];
- if(r&&r.active&&!r.done){
-  const total=r.clickAt?Date.now()-r.clickAt:0;
-  const left=Math.max(0,Math.ceil((VF_MIN_TOTAL-total)/1000));
-  if(left>0)return `<span class="vt-count">${left}s</span>`;
+function vfDone(i,t){
+ let rec=vfMem[i];
+ if(!rec){
+  try{rec=JSON.parse(localStorage.getItem(VF_GATE_KEY+i)||'null')}catch(e){rec=null}
+  if(rec)vfMem[i]=rec;
  }
- return ico('ext');
+ return !!(rec&&typeof rec.exp==='number'&&rec.exp>Date.now()&&rec.url===t.url);
 }
-function vfPaintRow(t){
- const a=document.querySelector('.vtask[data-vkey="'+t.key+'"]');
- if(!a)return;
- const r=vfRun[t.key];
- a.classList.toggle('is-done',vfDone(t));
- a.classList.toggle('is-wait',!!(r&&r.active&&!r.done));
- const end=a.querySelector('.vt-end');if(end)end.innerHTML=vfEndHtml(t);
+function vfSetDone(i,t){
+ const rec={exp:Date.now()+VF_TTL_MS,url:t.url};
+ vfMem[i]=rec;
+ try{localStorage.setItem(VF_GATE_KEY+i,JSON.stringify(rec))}catch(e){}
 }
-function vfPaintProgress(){
- const L=vfList(),n=L.length,done=L.filter(vfDone).length,all=n>0&&done===n;
- const c=$('#vCount');if(c)c.textContent=done+'/'+n;
- const bar=$('#vBar');if(bar)bar.style.width=(n?Math.round(done*100/n):0)+'%';
- const wrap=$('#vBarWrap');if(wrap){wrap.setAttribute('aria-valuemax',String(n));wrap.setAttribute('aria-valuenow',String(done))}
- const go=$('#vGo');
- if(go){
-  go.disabled=!all;
-  const use=go.querySelector('use');if(use)use.setAttribute('href',all?'#i-unlock':'#i-lock');
-  const txt=$('#vGoText');if(txt)txt.textContent=(C.verify&&C.verify.button)||'Mở khóa';
+function vfFirstOpen(){
+ const L=vfList();
+ for(let i=0;i<L.length;i++)if(!vfDone(i,L[i]))return i;
+ return L.length;
+}
+function vfAllDone(){
+ const L=vfList();
+ return vfBypassed()||!L.length||L.every((t,i)=>vfDone(i,t));
+}
+/* ---- Lối tắt ẩn: bấm 5 lần vào góc dưới bên phải khi đang xác minh ---- */
+function vfBypassed(){
+ try{return Number(localStorage.getItem(VF_BYPASS_KEY)||0)>Date.now()}catch(e){return false}
+}
+function vfSetBypass(){
+ try{localStorage.setItem(VF_BYPASS_KEY,String(Date.now()+VF_TTL_MS))}catch(e){}
+}
+function vfVideoId(u){
+ const m=String(u||'').match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);
+ return m?m[1]:'';
+}
+function vfShortLabel(t){
+ const m={yt:'Đăng ký',like:'Like',chat:'Comment'};
+ return m[t.icon]||String(t.label||'Bước').slice(0,14);
+}
+function vfMeta(t){
+ if(t.icon==='yt')return {title:'Đăng ký kênh',action:'Đăng ký kênh ngay',confirm:'Tôi đã đăng ký',fail:'Bạn chưa đăng ký kênh, vui lòng quay lại để đăng ký!',desc:'Bấm nút bên dưới và <b>ĐĂNG KÝ</b> kênh YouTube của mình để tiếp tục.'};
+ if(t.icon==='like')return {title:'Like video',action:'Mở video & Like ngay',confirm:'Tôi đã Like',fail:'Bạn chưa like video, vui lòng quay lại để like!',desc:'Hãy <b>LIKE</b> video YouTube dưới đây để hoàn tất.'};
+ if(t.icon==='chat')return {title:'Bình luận video',action:'Mở video & Comment ngay',confirm:'Tôi đã Comment',fail:'Bạn chưa comment video, vui lòng quay lại để comment!',desc:'Hãy <b>COMMENT</b> video YouTube dưới đây (nội dung gì cũng được) để hoàn tất.'};
+ return {title:String(t.label||'Mở link'),action:String(t.label||'Mở link'),confirm:'Tôi đã hoàn tất',fail:'Bạn chưa hoàn tất, vui lòng quay lại để hoàn tất!',desc:'Bấm nút bên dưới để mở liên kết và hoàn tất bước này.'};
+}
+function vfNote(note,msg,kind){
+ if(!note)return;
+ note.className='vgate-note'+(kind?' '+kind:'');
+ note.innerHTML=msg;
+ if(kind==='warn'){
+  note.classList.add('shake');
+  setTimeout(()=>note.classList.remove('shake'),450);
+  if(navigator.vibrate){try{navigator.vibrate([90,45,90])}catch(e){}}
  }
- const hint=$('#vHint');
- if(hint)hint.innerHTML=all?'<b>Đã hoàn tất!</b> Bấm nút bên trên để vào kho tài nguyên.':'Mỗi bước cần mở link và ở lại ít nhất <b>4 giây</b>.';
 }
 function vfRender(){
- const v=C.verify||{},L=vfList();
+ const v=C.verify||{},L=vfList(),cur=vfFirstOpen();
  const ti=$('#vTitle');if(ti)ti.textContent=v.title||'Mở link';
  const su=$('#vSub');if(su)su.textContent=v.subtitle||'Hoàn thành các bước để tiếp tục';
- const box=$('#vTasks');
- if(box){
-  box.innerHTML=L.length?L.map(t=>{
-   const done=vfDone(t);
-   return `<a class="vtask t-${esc(t.tone)}${done?' is-done':''}" href="${esc(t.url)}" target="_blank" rel="noopener" data-vkey="${t.key}"><span class="vt-ico">${ico(t.icon)}</span><span class="vt-label">${esc(t.label)}</span><span class="vt-end">${vfEndHtml(t)}</span></a>`;
-  }).join(''):'<p class="vhint">Chưa có bước xác minh nào.</p>';
+ const steps=$('#vSteps');
+ if(steps){
+  steps.innerHTML=L.map((t,i)=>{
+   const cls=vfDone(i,t)?'done':i===cur?'active':'';
+   return `<span class="vstep-dot ${cls}"${i===cur?' aria-current="step"':''}>${ico(t.icon)}<span>${esc(vfShortLabel(t))}</span></span>`;
+  }).join('');
  }
- vfPaintProgress();
-}
-function vfComplete(t){
- const r=vfRun[t.key];if(!r)return;
- r.done=true;r.active=false;
- S.tasks=S.tasks||{};S.tasks[t.key]=1;saveS();
- vfPaintRow(t);vfPaintProgress();
-}
-function vfTick(){
- const L=vfList();let active=false;
- L.forEach(t=>{
-  const r=vfRun[t.key];
-  if(!r||!r.active||r.done)return;
-  active=true;
-  const total=r.clickAt?Date.now()-r.clickAt:0;
-  if(total>=VF_MIN_TOTAL){vfComplete(t);return}
-  vfPaintRow(t);
+ const box=$('#vGate');if(!box)return;
+ if(!L.length){box.innerHTML='<p class="vhint">Chưa có bước xác minh nào.</p>';return}
+ if(cur>=L.length){box.innerHTML='';return}
+ const t=L[cur],m=vfMeta(t),last=cur===L.length-1;
+ const confirmLabel=last?((v.button||'Mở khóa')):m.confirm;
+ const vid=(t.icon==='like'||t.icon==='chat')?vfVideoId(t.url):'';
+ const video=vid?`<div class="vgate-video"><span class="vgate-thumb"><img src="https://i.ytimg.com/vi/${esc(vid)}/hqdefault.jpg" alt="" loading="lazy"><span class="vgate-play">${ico('yt')}</span></span><span class="vgate-vinfo"><b>Video cần ${t.icon==='like'?'like':'comment'} để tiếp tục</b><small>youtu.be/${esc(vid)}</small></span></div>`:'';
+ box.innerHTML=`<span class="vgate-ico t-${esc(t.tone)}">${ico(t.icon)}</span><h2>Bước ${cur+1}: ${esc(m.title)}</h2><p class="vgate-desc">${m.desc}</p>${video}<div class="vgate-actions"><a class="vtask t-${esc(t.tone)}" id="vLink" href="${esc(t.url)}" target="_blank" rel="noopener"><span class="vt-ico">${ico(t.icon)}</span><span class="vt-label">${esc(m.action)}</span><span class="vt-end">${ico('ext')}</span></a><button class="btn vunlock" id="vConfirm" type="button" disabled>${ico('ok')}<span>${esc(confirmLabel)}</span></button></div><p class="vgate-note" id="vNote">Bấm <b>“${esc(m.action)}”</b> trước, sau đó quay lại bấm <b>“${esc(confirmLabel)}”</b>.</p>`;
+ const link=$('#vLink'),confirm=$('#vConfirm'),note=$('#vNote');
+ let clicked=false,startedAt=0,locked=false;
+ if(link)link.addEventListener('click',()=>{
+  clicked=true;startedAt=Date.now();locked=false;
+  try{if(MUS.ready&&MUS.want&&!MUS.playing)musPlay()}catch(e){}
+  vfStat(t);
+  if(confirm)confirm.disabled=false;
+  vfNote(note,'Đã mở link. Hoàn thành xong thì bấm <b>“'+esc(confirmLabel)+'”</b>.','ok');
  });
- vfPaintProgress();
- if(!active&&vfTimer){clearInterval(vfTimer);vfTimer=null}
+ if(confirm)confirm.addEventListener('click',()=>{
+  if(!clicked){vfNote(note,'Bạn cần bấm <b>“'+esc(m.action)+'”</b> trước!','warn');return}
+  if(locked||Date.now()-startedAt<VF_WAIT_MS){locked=true;vfNote(note,esc(m.fail),'warn');return}
+  vfSetDone(cur,t);
+  if(cur+1>=L.length){route();return}
+  vfRender();
+ });
 }
-function vfEnsureTimer(){if(vfTimer)return;vfTimer=setInterval(vfTick,250)}
-function vfBegin(key){
- const t=vfTask(key);if(!t||vfDone(t))return;
- let r=vfRun[key];
- if(!r)r=vfRun[key]={clickAt:0,away:0,awayStart:0,active:false,done:false};
- if(!r.active){r.active=true;r.clickAt=Date.now();r.away=0;r.awayStart=vfHiddenAt||0}
- else if(vfHiddenAt&&!r.awayStart){r.awayStart=vfHiddenAt}
- vfPaintRow(t);vfPaintProgress();vfEnsureTimer();
-}
-function vfHide(){
- if(vfHiddenAt)return;
- vfHiddenAt=Date.now();
- Object.keys(vfRun).forEach(k=>{const r=vfRun[k];if(r.active&&!r.done&&!r.awayStart)r.awayStart=vfHiddenAt});
-}
-function vfShow(){
- if(!vfHiddenAt)return;
- const d=Date.now()-vfHiddenAt;vfHiddenAt=0;
- Object.keys(vfRun).forEach(k=>{const r=vfRun[k];if(r.active&&!r.done&&r.awayStart){r.away+=d;r.awayStart=0}});
- vfTick();
-}
-addEventListener('blur',vfHide);
-addEventListener('focus',vfShow);
-document.addEventListener('visibilitychange',()=>{document.hidden?vfHide():vfShow()});
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
 /* ---- Thống kê thật (abacus — mạng lỗi thì im lặng bỏ qua, không ảnh hưởng web) ---- */
 const STAT_NS='nguyenvancheat-web';
@@ -1290,34 +1315,38 @@ function updateClock(){
 setInterval(updateClock,1000);
 $('#year').textContent=new Date().getFullYear();
 
-function vfStat(key){
+function vfStat(t){
  try{
-  const i=Number(key)||0,flag='dh_vf_s'+i;
+  const k=(t&&t.icon)||'';
+  if(k!=='yt'&&k!=='like'&&k!=='chat')return;
+  const flag='dh_vf_'+k;
   if(sessionStorage.getItem(flag))return;
   sessionStorage.setItem(flag,'1');
-  statHit(i===0?'sub':i===1?'like':i===2?'comment':'verify');
+  statHit(k==='yt'?'sub':k==='like'?'like':'comment');
  }catch(e){}
 }
 function route(){
- const list=vfList();
- const done=!list.length||(!!S.done&&vfAllDone());
+ const done=vfAllDone();
  $('#gate').hidden=done;$('#hub').hidden=!done;
  if(done){try{if(!sessionStorage.getItem('dh_pc')){sessionStorage.setItem('dh_pc','1');statHit('passed')}}catch(e){}renderHub();syncToTop();scrollTo(0,0);playStats();return}
  vfRender();
  setTimeout(()=>{try{musResume()}catch(e){}},240);
 }
-const vGoBtn=$('#vGo');
-if(vGoBtn)vGoBtn.onclick=()=>{
- if(!vfAllDone())return;
- S.done=1;saveS();route();
-};
-const vTasksBox=$('#vTasks');
-if(vTasksBox)vTasksBox.addEventListener('click',e=>{
- const a=e.target.closest('.vtask');if(!a)return;
- const key=a.dataset.vkey,t=vfTask(key);
- if(!t){e.preventDefault();toast('Link xác minh chưa hợp lệ');return}
- if(MUS.ready&&MUS.want&&!MUS.playing)musPlay();
- vfStat(key);vfBegin(key);
+/* ---- Lối tắt ẩn cho admin: bấm 5 lần góc dưới bên phải để bỏ qua xác thực ---- */
+let vfTapN=0,vfTapT=0;
+document.addEventListener('click',e=>{
+ const g=$('#gate');
+ if(!g||g.hidden)return;
+ if(e.clientX<innerWidth-72||e.clientY<innerHeight-72)return;
+ const now=Date.now();
+ if(now-vfTapT>4000)vfTapN=0;
+ vfTapT=now;
+ if(++vfTapN<5)return;
+ vfTapN=0;
+ vfSetBypass();
+ try{if(MUS.ready&&MUS.want&&!MUS.playing)musPlay()}catch(e){}
+ route();
+ toast('Đã bỏ qua xác thực');
 });
 
 /* ---- Số liệu đếm chạy khi vào trang ---- */
